@@ -3,6 +3,7 @@ var fs = require('fs')
 
 http
   .createServer(function (req, res) {
+    //console.log('hello')
     // const text = fs.readFileSync('./content/big.txt', 'utf8')
     // res.end(text)
     const fileStream = fs.createReadStream('./content/big.txt', 'utf8')
