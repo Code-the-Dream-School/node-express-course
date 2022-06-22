@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "13-event-emitter.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha --recursive test",
     "bump-version": "npm version patch"
   },
