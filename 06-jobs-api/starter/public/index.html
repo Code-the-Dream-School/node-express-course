@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs List</title>
+</head>
+
+<body>
+    <h1>Jobs List</h1>
+    <button type="button" id="logoff" style="display:none;">logoff</button>
+    <hr>
+    <p id="message"></p>
+    <hr>
+    <div id="logon-register" style="display:none;">
+        <button type="button" id="logon">logon</button>
+        <button type="button" id="register">register</button>
+    </div>
+    <div id="logon-div" style="display:none;">
+        <form>
+            <div>
+                <label for="email">email:</label>
+                <input type="email" id="email">
+            </div>
+            <div>
+                <label for="password">password:</label>
+                <input type="password" id="password">
+            </div>
+            <button type="button" id="logon-button">logon</button>
+            <button type="button" id="logon-cancel">cancel</button>
+        </form>
+    </div>
+    <div id="register-div" style="display:none;">
+        <form>
+            <div>
+                <label for="name">name:</label>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="email1">email:</label>
+                <input type="email" id="email1">
+            </div>
+            <div>
+                <label for="password1">password:</label>
+                <input type="password" id="password1">
+            </div>
+            <div>
+                <label for="password2">verify password:</label>
+                <input type="password" id="password2">
+            </div>
+            <button type="button" id="register-button">register</button>
+            <button type="button" id="register-cancel">cancel</button>
+        </form>
+    </div>
+    <div id="jobs" style="display:none;">
+        <p id="jobs-message"></p>
+        <table id="jobs-table" style="display:none;">
+            <tr id="jobs-table-header">
+                <th>Company</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th colspan="2"></th>
+            </tr>
+        </table>
+        <button type="button" id="add-job">add job</button>
+    </div>
+    <div id="edit-job" style="display:none;">
+        <form>
+            <div>
+                <label for="company">company:</label>
+                <input type="text" id="company">
+            </div>
+            <div>
+                <label for="position">position:</label>
+                <input type="text" id="position">
+            </div>
+            <div>
+                <label for="status">status:</label>
+                <select id="status">
+                    <option value="pending">pending</option>
+                    <option value="interview">interview</option>
+                    <option value="declined">declined</option>
+                </select>
+            </div>
+            <button type="button" id="adding-job">add</button>
+            <button type="button" id="edit-cancel">cancel</button>
+        </form>
+    </div>
+    <script src="./jobs.js"></script>
+</body>
+</html>
