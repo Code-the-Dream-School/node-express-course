@@ -1,6 +1,11 @@
 const http = require("http");
 const { readFileSync } = require("fs");
 const data = readFileSync("./new-public/index.html");
+const logger = require("practice-middleware.js");
+const express = require("express");
+
+express.use(logger);
+
 const server = http.createServer((req, res) => {
   const url = req.url;
   if (url === "/") {

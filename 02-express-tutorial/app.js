@@ -1,18 +1,45 @@
-const express = require("express");
-const app = express();
+// const http = require("http");
+const { readFileSync } = require("fs");
+const data = readFileSync("./new-public/index.html");
+const logger = require("./practice-middleware.js");
+const app = require("express")();
 
-const people = require("./routes/people");
-const auth = require("./routes/auth");
+app.use(logger);
+app.get("/", (req, res, next) => {
+  const url = req.url;
+  res.writeHead(200, { "content-type": "text/html" });
+  res.write(data);
+  res.end();
+});
 
-app.use(express.static("./methods-public"));
+app.get("/sample", (req, res, next) => {
+  const url = req.url;
+  res.writeHead(200, { "content-type": "text/html" });
+  res.write("<h1>This is working</h1>");
+  res.end();
+});
+app.get("*", (req, res, next) => {
+  const url = req.url;
+  res.writeHead(404, { "content-type": "text/html" });
+  res.write("<h1>page not found</h1>");
+  res.end();
+});
+// const server = http.createServer((req, res) => {
+//   const url = req.url;
 
-app.use(express.urlencoded({ extended: false }));
+//   if (url === "/") {
+//    console.
+//   } else if (url === "/sample") {
+//     res.writeHead(200, { "content-type": "text/html" });
+//     res.write("<h1>This is working</h1>");
+//     res.end();
+//   } else {
+//     res.writeHead(404, { "content-type": "text/html" });
+//     res.write("<h1>page not found</h1>");
+//     res.end();
+//   }
+// });
 
-app.use(express.json());
-
-app.use("/api/people", people);
-app.use("/login", auth);
-
-app.listen(5000, () => {
-  console.log("Server is listening on port 5000....");
+app.listen(3000, () => {
+  console.log("server listening at port 3000");
 });
