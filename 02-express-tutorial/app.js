@@ -1,63 +1,30 @@
-const { query } = require('express');
 const express = require('express');
 const app = express();
-const { products } = require('./data');
 
-app.get('/', (req, res) => {
-	res.send('<h1> Home Page </h1> <a href="/api/products">products</a>');
-});
+const people = require('./route/people')
+const auth = require('./route/auth')
 
-app.get('/api/products', (req, res) => {
-	const newProducts = products.map((products) => {
-		const { id, name, image } = product;
-		return { id, name, image }
-	})
-	res.json(newProducts);
-})
-/* Products page */
-app.get('/api/products/:productID', (req, res) => {
-	// console.log(req);
-	// console.log(req.params);
-	const { productID } = req.params;
+/* HTTP Methods
+	1. GET - Read Data
+	2. POST - Insert Data
+	3. PUT - Update Data
+	4. DELETE - Delete Data
+*/                        
 
-	const singleProduct = products.find(
-		(product) => product.id === Number(productID));
+/* static assets */
+app.use(express.static('./methods-public'));
 
-	/*if product does not exist */
-	if (!singleProduct) {
-		return res.status(404).send('The product does not exist');
-	}
-	return res.json(singleProduct)
-})
+/* parse form data  - middlware function */
+app.use(express.urlencoded({ extended: false }));
 
-/* product review page */
-app.get('/api/products/:productID/reviews/:reviewID', (req, res) => {
-	console.log(req.params);
-})
+/* Parsed json*/
+app.use(express.json());
 
-/* requesting amd recieving queries   */
-
-app.get('/api/v1/query', (req, res) => {
-	// console.log(req.query);
-	const { search, limit } = req.query;
-	let sortedProductes = [...products]; /* filtering through queries */
+/* middleware  */
+app.use('/api/people', people);
+app.use('/login', auth);
 
 
-/* filtering through queries */
-	if (search) {
-		sortedProductes = sortedProductes.filter((products) => {
-			return products.name.startsWith(search);
-		})
-	}
-	if (limit) {
-		sortedProductes = sortedProductes.slice(0, Number(limit));
-	} if (sortedProductes.length < 1) {
-		// res.status(200).send('no product matched your results')
-		return res.status(200).json({ sucess: true, data: [] });
-	}
-	res.status(200).json(sortedProductes);
-})
-
-app.listen(2222, (req, res) => {
-	console.log('Server is listening on port 2222');
+app.listen(3000, () => {
+	console.log('Listening to port 3000...');
 });
