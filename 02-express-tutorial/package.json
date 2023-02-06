@@ -2,9 +2,9 @@
   "name": "2-express-tutorial",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./practiceExpress.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon ./practiceExpress.js"
   },
   "keywords": [],
   "author": "",
