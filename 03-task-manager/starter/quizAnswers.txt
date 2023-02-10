@@ -1,0 +1,24 @@
+1. explain how middleware is used in an Express application.
+    - In an application, middleware is a method of validation. 
+    This includes error handleing, authentication, and others alike.
+    This allows an app to pass multiple methods/functions between code blocks 
+    and run one after another.
+
+2. What does CRUD stand for?
+    - The CRUD abbreviation stands for Create, Read, Update, and Destroy. 
+    This allows an API to create data provided froma  user, and then read the data.
+    The data can be sent to a noSQL database like MongoDB where it can b stored.
+    Then, the app allows the user to 'update' the data, in other words modify
+    existing data to the database. Finally, the API allows a user to delete
+    data from the database.
+3. You are careful to store your sensitive information in a .env file.
+    1. How do you get your app to access the information in the .env file?
+    In order to keep api tokens secrete and other sensitive information, 
+    storing the token as a varible allows programmers to use the variable 
+    globally or locally. Instead of revealing it, it's accessed like a variable.
+
+
+    2. How do you protect the contents of the .env file so that it is not stored in your github repository?
+    To keep the .env file locally, and not pushed to github; including the
+    file in the .gitignore directory allows it to be ingored when a developer
+    pushes code to github
