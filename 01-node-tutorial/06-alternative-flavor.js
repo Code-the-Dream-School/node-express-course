@@ -1,6 +1,6 @@
-module.exports.items = ['item1', 'item2']
+module.exports.items = ["item 1", "item 2"];
 const person = {
-  name: 'bob',
-}
+  name: "bob",
+};
 
-module.exports.singlePerson = person
+module.exports.singlePerson = person;
