@@ -1,0 +1,15 @@
+{
+  "name": "node_express",
+  "version": "1.0.0",
+  "description": "simple node.js programs",
+  "main": "01-intro.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Catherine Njenga",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
