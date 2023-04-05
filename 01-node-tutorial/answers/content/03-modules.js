@@ -18,11 +18,11 @@
 const names = require("../content/04-names");
 const sayHello = require("../content/05-utils");
 const data06 = require("../content/06-alternative-flavor");
-// console.log(data06)
+console.log(data06)
 
-// sayHello("Annabeth");
-// sayHello(names.percy);
-// sayHello(names.grover);
+sayHello("Annabeth");
+sayHello(names.vader);
+sayHello(names.butler);
 
 // importing modules also invokes it 
 const addedValues = require("../content/07-mind-grenade");

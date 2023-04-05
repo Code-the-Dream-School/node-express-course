@@ -1,16 +1,27 @@
-const fs = require("fs");
+const { writeFile } = require("fs");
+const os = require("os");
+
+const sent01 = require("../answers/practice2.js");
+console.log(sent01.sentence01);
+
+const userINFO = os.userInfo().username;
+
+const content = sent01.sentence01 + userINFO;
+
+writeFile(
+  "01-node-tutorial/answers/content/practice.txt",
+  content,
+
+  (err) => {
+    console.log(err);
+  }
+);
+
+// Test for code
 // const os = require("os");
 
-fs.writeFile("./answers/practice.txt");
-console.log("File written!!");
-
-fs.readFile("./answers/practice2.txt", "utf-8", (err, data) => {
-  if (err) {
-    console.log(err);
-    return;
-  } else {
-    console.log(data);
-  }
-});
-
-console.log("Reading file!");
+// try {
+//   console.log(os.userInfo());
+// } catch (err) {
+//   console.log(": error occurred" + err);
+// }
