@@ -2,9 +2,12 @@
 
 const port = 3000,
   express = require("express"),
-  app = express();
+  app = express(),
+  consoleLog = require('./practice-middleware');
 
+app.use(consoleLog);
 app.use(express.static("./new-public"));
+
 
 app.get("/sample", (req, res) => {
   res.status(200).send("This is working.");
