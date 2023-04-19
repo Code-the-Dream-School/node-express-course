@@ -1,0 +1,19 @@
+In this lesson, you created a middleware function called asyncWrapper. Why?
+  We created the asyncWrapper middleware function to create a custom function that would help us avoid repetitive code of wrapping the 
+  promise/data returned from the MongoDB server in a try catch block.
+Suppose that you want to make sure that both a status code and and error message are send back to the user 
+when they request the URL for a task that does not exist. 
+Assume that you’ve created a CustomAPIError class and an error handler that references that class. Complete the code:
+
+const getTask = asyncWrapper(async (req, res, next) => {
+  const { id: taskID } = req.params;
+  const task = await Task.findOne({ _id: taskID });
+  if (!task) {
+    // your code here
+    // We pass the message and status code arguments as defined in our CustomAPIError class into the function createCustomError invocation.
+    // An instance of the CustomAPIError is returned which is what we pass as an argument to the next function.
+    // The error is then passed to the next middleware, our custom error handler.
+    next(createCustomError(`There is no task with id: ${taskID}`, 404));
+  }
+  res.status(200).json({ task });
+});
