@@ -20,19 +20,39 @@ const getBody = (req, callback) => {
   });
 };
 
-// here, you could declare one or more variables to store what comes back from the form.
-let item = "Enter something below.";
+// variables .
+let name = "";
+let colors = "not indicated";
+let myName = "Bino";
+let yourGuess = "";
+let winner = "";
 
-// here, you can change the form below to modify the input fields and what is displayed.
-// This is just ordinary html with string interpolation.
 const form = () => {
   return `
-  <body>
-  <p>${item}</p>
+  <body style="background:${colors}">
+  <h1>Welcome to Our Page <span style="color:gold">${name.toUpperCase()}</span></h1>
+  <h1>Your favorite color is <span style="color:gold">${colors.toUpperCase()}</span></h1>
   <form method="POST">
-  <input name="item"></input>
+
+  <label for="name">Enter your name:
+  <input name="name"></input>
+ 
+  <label for="myName">Guess my name:
+  <input name="yourGuess"></input>
+  
+    <label for="colors">Choose a color:
+      <select id="colors" name="colors">
+        <option value="" class="">Choose color:</option>
+        <option value="red" style="color:red" name="colors">Red</option>
+        <option value="blue" style="color:blue" name="colors">Blue</option>
+        <option value="yellow" style="color:yellow" name="colors">Yellow</option>
+        <option value="green" style="color:green" name="colors">Green</option>
+      </select>
+    </label>
   <button type="submit">Submit</button>
   </form>
+  <h2>This is your guess: ${yourGuess}</h2>
+  <h2>And The Winner is ...  ${winner}</h2>
   </body>
   `;
 };
@@ -43,13 +63,23 @@ const server = http.createServer((req, res) => {
   if (req.method === "POST") {
     getBody(req, (body) => {
       console.log("The body of the post is ", body);
-      // here, you can add your own logic
-      if (body["item"]) {
-        item = body["item"];
+
+      if (
+        body["yourGuess"] === "Bino" ||
+        body["yourGuess"] === "bino" ||
+        body["yourGuess"] === "BINO"
+      ) {
+        yourGuess = body["yourGuess"];
+        winner = body["name"];
+        colors = body["colors"];
+        name = body["name"];
       } else {
-        item = "Nothing was entered.";
+        name = body["name"];
+        yourGuess = body["yourGuess"];
+        winner = "Bino";
+        colors = body["colors"];
       }
-      // Your code changes would end here
+
       res.writeHead(303, {
         Location: "/",
       });
