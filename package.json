@@ -1,0 +1,16 @@
+{
+  "name": "express-course",
+  "version": "1.0.0",
+  "description": "#### Node Course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "dev": "nodemon prompter.js"
+  },
+  "author": "David Villavicencio",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
