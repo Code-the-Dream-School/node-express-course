@@ -2,6 +2,7 @@ const express = require("express");
 const path = require('path');
 const app = express(); 
 const { products } = require('./data');
+const cookieParser = require("cookie-parser");
 
 const logger = function(req, res, next) {
   console.log(`Method: ${req.method}`)
@@ -13,9 +14,40 @@ const logger = function(req, res, next) {
 // for Front-end
 app.use(express.static('./methods-public'));
 
+// cookies (additional assignment)
+app.use(cookieParser());
 // for POST
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+const auth = function(req, res, next) {
+  if (req.cookies.name) {
+    req.user = req.cookies.name;
+    next();
+  }
+  res.status(401).json({message: "unauthorized"});
+};
+
+app.post('/logon', (req, res) => {
+  const { name } = req.body;
+
+  if (name) { // if user exists
+    res.cookie("name:", name);
+    res.status(201).json({message:`Hello ${name}`}); // Hello User
+  }
+  res.status(400).json({message:"ERROR: Name is required"});
+}); 
+
+app.delete('/logoff', (req, res) => {
+  res.clearCookie("name");
+  res.status(200).json({message: "User is logged off"});
+});
+
+app.get('/test', auth, (req, res) => {
+  res.status(200).json({message: `Welcome, ${req.user}`});
+});
+// end of optional assignment
+
 
 const peopleRouter = require('./routes/people');
 app.use('/api/v1/people', peopleRouter);
