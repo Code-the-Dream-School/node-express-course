@@ -1,3 +1,4 @@
+//cheking assignment for lesson 2
 const http = require("http");
 var StringDecoder = require("string_decoder").StringDecoder;
 
@@ -55,7 +56,7 @@ const server = http.createServer((req, res) => {
       console.log("The body of the post is ", body);
       // here, you can add your own logic
        if (body["item"]&&!body.color) {
-        item += " " + body["item"];
+        item += ", " + body["item"];
         color = color
       } 
        if (!body["item"]&&body.color) {
@@ -63,7 +64,7 @@ const server = http.createServer((req, res) => {
         color = body.color
       }
       if (body["item"]&&body.color) {
-        item += " " + body["item"];
+        item += ", " + body["item"];
         color = body.color
       }
       // Your code changes would end here
@@ -75,6 +76,10 @@ const server = http.createServer((req, res) => {
   } else {
     res.end(form());
   }
+});
+
+server.on("request", (req) => {
+  console.log("event received: ", req.method, req.url);
 });
 
 server.listen(3000);
