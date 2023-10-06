@@ -1,4 +1,5 @@
 const http = require("http");
+const fs = require('fs'); 
 var StringDecoder = require("string_decoder").StringDecoder;
 
 const getBody = (req, callback) => {
@@ -21,17 +22,40 @@ const getBody = (req, callback) => {
 };
 
 // here, you could declare one or more variables to store what comes back from the form.
-let item = "Enter something below.";
+let greeting = "Hi, this is our hometask form!";
+let item = "Enter your name.";
+let userComment = "No comment provided yet.";
+
 
 // here, you can change the form below to modify the input fields and what is displayed.
 // This is just ordinary html with string interpolation.
-const form = () => {
+const form = (color) => {
   return `
-  <body>
-  <p>${item}</p>
+  <body style="background-color: ${color};">
   <form method="POST">
-  <input name="item"></input>
-  <button type="submit">Submit</button>
+  <div>
+    <h2>${greeting}</h2>
+    <p>${item}</p>
+    <input name="item"></input>
+    <br/>
+    <br/>
+    <label for="comment">Your comment:</label>
+    <br/>
+    <textarea name="comment"></textarea>
+    <p>${userComment}</p>
+    <br/>
+    <label for="color">Choose a background color:</label>
+    <select name="color" id="color">
+      <option value="default" selected disabled>Choose...</option>
+      <option value="white">White</option>
+      <option value="blue">Blue</option>
+      <option value="pink">Pink</option>
+      <option value="yellow">Yellow</option>
+      <option value="green">Green</option>
+    </select>
+    <br/>
+    <button type="submit">Submit</button>
+  </div>
   </form>
   </body>
   `;
@@ -44,11 +68,20 @@ const server = http.createServer((req, res) => {
     getBody(req, (body) => {
       console.log("The body of the post is ", body);
       // here, you can add your own logic
-      if (body["item"]) {
-        item = body["item"];
-      } else {
-        item = "Nothing was entered.";
-      }
+      const dataToSave = {
+        item: body["item"] || "No name provided.",
+        userComment: body["comment"] || "No comment provided.",
+        color: body["color"] || "white"
+      };
+    
+      fs.writeFile('user_data.json', JSON.stringify(dataToSave), (err) => {
+        if (err) throw err;
+        console.log('Data saved!');
+      });
+
+      item = dataToSave.item;
+      userComment = dataToSave.userComment;
+      
       // Your code changes would end here
       res.writeHead(303, {
         Location: "/",
@@ -56,7 +89,14 @@ const server = http.createServer((req, res) => {
       res.end();
     });
   } else {
-    res.end(form());
+    fs.readFile('user_data.json', 'utf8', (err, data) => {
+      if (err) {
+        return res.end(form());
+      } else {
+        const existingData = JSON.parse(data);
+        res.end(form(existingData.color));
+      }
+    });
   }
 });
 
