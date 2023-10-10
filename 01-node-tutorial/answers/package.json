@@ -5,8 +5,8 @@
   "main": "01-intro.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon writeWithPromisesAwait.js",
-    "start": "node writeWithPromisesAwait.js"
+    "dev": "nodemon prompter.js",
+    "start": "node prompter.js"
   },
   "author": "AnnaSolovykh",
   "license": "ISC",
