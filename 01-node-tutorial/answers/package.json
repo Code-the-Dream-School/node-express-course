@@ -1,0 +1,16 @@
+{
+  "name": "betiel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "prompter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon prompter.js",
+    "start": "node prompter.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
