@@ -4,12 +4,12 @@ const { writeFile, readFile } = require("fs").promises;
 //  Use the .then style of asynchronous programming
 // Don’t create any functions, instead, use cascading .then statements in your mainline
 
-writeFile("temp.txt", "First line: Hello World").then(
+writeFile("temp.txt", "First line: Hello World \n").then(
     () => {
-        return writeFile("temp.txt", "Second line: Hello World");
+        return writeFile("temp.txt", "Second line: Hello World \n", { flag: 'a' });
     }).then(
         () => {
-            return writeFile("temp.txt", "Third line: Hello World");
+            return writeFile("temp.txt", "Third line: Hello World \n", { flag: 'a' });
         }).then(
             () => {
                 return readFile("temp.txt", "utf-8");
