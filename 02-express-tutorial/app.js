@@ -1,10 +1,16 @@
 const express = require('express');
 const app = express();
 
+const { products } = require("./data");
+
 app.use(express.static('./public'));
 
 app.get('/api/v1/test', (req, res) => {
     res.json({ message: "It worked!" });
+});
+
+app.get('/api/v1/products', (req, res) => {
+    res.json(products);
 });
 
 app.all('*', (req, res) => {
