@@ -29,7 +29,7 @@ app.get('/api/v1/products/:productID', (req, res) => {
 });
 
 app.get('/api/v1/query', (req, res) => {
-    const { search, limit, regex } = req.query;
+    const { search, limit, regex, maxprice } = req.query;
     let sortedProducts = [...products];
 
     if (regex) {
@@ -52,6 +52,15 @@ app.get('/api/v1/query', (req, res) => {
     if(sortedProducts.length < 1) {
         return res.status(200).json({success: true, data: []});
     }
+
+    if (maxprice) {
+        const validPrice = parseFloat(maxprice);
+        if (validPrice) {
+            sortedProducts = sortedProducts.filter(product => product.price < validPrice);
+        } else {
+            return res.status(400).json({success: false, message: 'Invalid maxprice value'});
+        }
+    } 
     res.status(200).json(sortedProducts);
 });
 
