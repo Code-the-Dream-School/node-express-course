@@ -29,17 +29,26 @@ app.get('/api/v1/products/:productID', (req, res) => {
 });
 
 app.get('/api/v1/query', (req, res) => {
-    const { search, limit } = req.query;
+    const { search, limit, regex } = req.query;
     let sortedProducts = [...products];
 
-    if (search) {
+    if (regex) {
+        try {
+            const searchTermRegex = new RegExp(regex, 'i'); 
+            sortedProducts = sortedProducts.filter(product => searchTermRegex.test(product.name));
+        } catch {
+            return res.status(400).json({ success: false, message: 'Invalid regex pattern' });
+        }
+    } else if (search) {
         sortedProducts = sortedProducts.filter(product => {
-            return product.name.startsWith(search);
-        })
+            return product.name.toLowerCase().startsWith(search.toLowerCase());
+        });
     }
+
     if (limit) {
         sortedProducts = sortedProducts.slice(0, Number(limit));
     }
+
     if(sortedProducts.length < 1) {
         return res.status(200).json({success: true, data: []});
     }
