@@ -2,4 +2,4 @@ function sayHello(name) {
     return `Hello, ${name}!`;
 }
 
-export { sayHello };
+module.exports = sayHello();
