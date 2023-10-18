@@ -22,7 +22,7 @@ app.get('/api/v1/products/:productID', (req, res) => {
     const singleProduct = products.find(product => product.id === idToFind);
 
     if(!singleProduct) {
-        return res.status(404).send({message: 'That product was not found.'});
+        return res.status(404).send({ message: 'That product was not found.' });
     };
 
     return res.json(singleProduct);
@@ -50,7 +50,7 @@ app.get('/api/v1/query', (req, res) => {
     }
 
     if(sortedProducts.length < 1) {
-        return res.status(200).json({success: true, data: []});
+        return res.status(200).json({ success: true, data: [] });
     }
 
     if (maxprice) {
@@ -58,7 +58,7 @@ app.get('/api/v1/query', (req, res) => {
         if (validPrice) {
             sortedProducts = sortedProducts.filter(product => product.price < validPrice);
         } else {
-            return res.status(400).json({success: false, message: 'Invalid maxprice value'});
+            return res.status(400).json({ success: false, message: 'Invalid maxprice value' });
         }
     } 
     res.status(200).json(sortedProducts);
