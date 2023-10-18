@@ -3,6 +3,10 @@ const app = express();
 
 app.use(express.static('./public'));
 
+app.get('/api/v1/test', (req, res) => {
+    res.json({ message: "It worked!" });
+});
+
 app.all('*', (req, res) => {
     res.status(404).send('<h1>Page not found</h1>');
 });
