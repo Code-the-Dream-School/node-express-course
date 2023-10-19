@@ -55,7 +55,6 @@ app.get("/test", auth, (req, res) => {
 });
 
 app.post("/logon", (req, res) => {
-  console.log(req);
   if (!req.body.name) {
     res.status(400).json({ success: false, message: "Please provide a name" });
   } else {
