@@ -29,13 +29,13 @@ updatePerson = (req, res) => {
       .status(404)
       .json({ success: false, msg: `no person with id ${req.params.id}` });
   }
-  const newPerson = people.map(person => {
+  const newPeople = people.map(person => {
     if (person.id === Number(req.params.id)) {
       person.name = req.body.name;
     }
     return person;
   });
-  res.status(200).json({ success: true, data: newPerson });
+  res.status(200).json({ success: true, data: newPeople });
 };
 
 deletePerson = (req, res) => {
@@ -45,10 +45,10 @@ deletePerson = (req, res) => {
       .status(404)
       .json({ success: false, msg: `no person with id ${req.params.id}` });
   }
-  const newPerson = people.filter(
+  const newPeople = people.filter(
     person => person.id !== Number(req.params.id)
   );
-  return res.status(200).json({ success: true, data: newPerson });
+  return res.status(200).json({ success: true, data: newPeople });
 };
 
 module.exports = {
