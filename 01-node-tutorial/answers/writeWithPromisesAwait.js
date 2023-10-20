@@ -2,9 +2,9 @@ const { writeFile, readFile } = require("fs").promises;
 
 const writer = async() => {
 try{
-    result = await writeFile("./temporary/temp.txt", "New text for lesson2 for WriteWithPromisesAwait\n")
-    writeFile("./temporary/temp.txt", "New text for lesson2 for WriteWithPromisesAwait\n", {flag: "a"})
-    writeFile("./temporary/temp.txt", "New text for lesson2 for WriteWithPromisesAwait\n", {flag: "a"})
+    await writeFile("./temporary/temp.txt", "New text for lesson2 for WriteWithPromisesAwait\n")
+    await writeFile("./temporary/temp.txt", "New text for lesson2 for WriteWithPromisesAwait\n", {flag: "a"})
+    result = await writeFile("./temporary/temp.txt", "New text for lesson2 for WriteWithPromisesAwait\n", {flag: "a"})
     return result
 } catch(err) {
     console.log("An error occurred: ", err);
