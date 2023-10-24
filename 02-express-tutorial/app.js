@@ -1,20 +1,10 @@
 const express = require('express');
 const app = express();
 
-const logger = (req, res, next) => {
-    const method = req.method;
-    const url = req.url;
-    console.log(method, url);
-    next();
-}
+const { people } = require('./data');
 
-app.use(["/", "/about"], logger);
-
-app.get('/', (req, res) => {
-    res.send('Home');
-})
-app.get('/about', (req, res) => {
-    res.send('About');
+app.get('/api/v1/people', (req, res) => {
+    res.json(people);
 })
 
 app.listen(3000, () => {
