@@ -9,7 +9,6 @@ app.use(express.json())
 
 //routes
 app.get("/", (req, res) => {
-//   res.status(200).json({ success: true, message: "Hello" });
   res.status(200).send("Task Manager App");
 })
 
