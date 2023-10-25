@@ -1,0 +1,66 @@
+/*Load in a font family from Google Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/*Change the default text color
+Customize the font family
+*/
+body {
+    color: rgb(53, 5, 126);
+    font-family: 'Montserrat', 'Helvetica', sans-serif;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+    animation: myanimation 15s infinite;
+}
+
+/*  Change the background color of the page body */
+
+@keyframes myanimation {
+    0% {
+        background-color: rgb(251, 242, 255);
+    }
+
+    20% {
+        background-color: rgb(246, 232, 254);
+    }
+
+    40% {
+        background-color: rgb(217, 203, 227);
+    }
+
+    60% {
+        background-color: rgb(219, 216, 221);
+    }
+
+    80% {
+        background-color: rgb(248, 245, 252);
+    }
+
+    100% {
+        background-color: rgb(251, 242, 255);
+    }
+}
+
+
+header {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+h1 {
+    color: rgb(53, 5, 126);
+    font-size: 50px;
+    font-weight: bold;
+}
+
+button {
+    background-color: rgb(206, 205, 210);
+    color: rgb(38, 4, 138);
+    font-size: 20px;
+    text-align: center;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 5px;
+    cursor: pointer;
+}
