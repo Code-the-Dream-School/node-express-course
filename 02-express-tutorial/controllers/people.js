@@ -4,6 +4,17 @@ const getPeople = (req, res) => {
     res.status(200).json( {success: true, data: people} );
 };
 
+const getPerson = (req, res) => {
+    const { id } = req.params;
+    const person = people.find(person=> person.id === Number(id));
+    if (!person) {
+        return res  
+            .status(400)
+            .json({ success: false, message: `No person is found with id ${id}` });
+    }
+    return res.status(200).json({ success: true, data: person });
+};
+
 const addPerson = (req, res) => {
     const { name } = req.body;
     if (!name) {
@@ -12,7 +23,7 @@ const addPerson = (req, res) => {
             .json({ success: false, message: "Please provide a name" });
     }
     people.push({ id: people.length + 1, name: name });
-    res.status(201).json({ success: true, data: [...people] });
+    return res.status(201).json({ success: true, data: [...people] });
 };
 
 const updatePerson = (req, res) => {
@@ -30,7 +41,7 @@ const updatePerson = (req, res) => {
         }
         return person;
     })
-    res.status(200).json( {success: true, data: newPeople} );
+    return res.status(200).json( {success: true, data: newPeople} );
 };
 
 const deletePerson = (req, res) => {
@@ -47,6 +58,7 @@ const deletePerson = (req, res) => {
 
 module.exports = {
     getPeople,
+    getPerson,
     addPerson,
     updatePerson,
     deletePerson
