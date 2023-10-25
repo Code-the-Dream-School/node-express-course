@@ -50,7 +50,8 @@ app.get("/api/v1/query", (req, res)=> {
         // res.status(200).send("no products match your search")
        return  res.status(200).json({success: true, data: []})
     }
-  return  res.status(200).json(sortedItems)
+    return  res.status(200).json({success: true, data: sortedItems})
+//   return  res.status(200).json(sortedItems)
     // res.send("hello world")
 
 })
