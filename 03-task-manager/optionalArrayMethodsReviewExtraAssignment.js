@@ -154,6 +154,86 @@ const names = [
   'Amy You'
 ];
 
+//- Create a new array with only each person's last name
+
+const lastName = names.map((person)=>{
+const p = person.split(" ")
+return p.at(-1)
+})
+console.log("challenge LastName", lastName)
+
+// - Filter names that don't match the format "<first> <last>"
+//   - Should remove Tam because she has a double-space
+//   - Should remove Carlow because he has a middle-name
+//   - Should also remove names like:
+//     - "Timothy      Cook"
+//     - "Nick_Masters"
+//     - "Timmy-Turner"
+//     - "Billy\nBob"
+//     - etc.
+
+const standartName = names.filter((person)=> {
+  const p = person.split(" ")
+  return p.length === 2 && p!==""
+  
+})
+console.log("challenge filter names that don't match the format <first> <last>", standartName)
+
+// - Create a new array where everyone's name is converted to "Title Case"
+//   - The first character of each word should be uppercase
+//   - All other characters in the word should be lowercase
+//   - expected output is ['Dimitry Santiago', 'Carlos D. Perez', 'Tam Person', ...]
+
+const titleCase = names.map((person)=>{
+  const nameFormat = []
+const p = person.split(" ")
+p.map((el)=> {
+  const upper = []
+  if (el[0] !== undefined) {
+upper.push(el[0].toUpperCase())
+  }
+const lower = el.slice(1)
+const nameString = upper.toString()+lower.toLowerCase()
+nameFormat.push(nameString)
+})
+return nameFormat.join(" ")
+})
+console.log("challenge Title Case", titleCase)
+
+// - Last Challenge:
+//     Remove names with the wrong format
+//     AND change it to "Title Case"
+//     AND remove people whose last name ends with z
+//     AND write a message asking them to sign up
+
+const question = (arr) => {
+const standartName = arr.filter((person)=> {
+  const p = person.split(" ")
+  return p.length === 2 && p!==""
+})
+const titleCase = standartName.map((person)=>{
+  const nameFormat = []
+const p = person.split(" ")
+p.map((el)=> {
+  const upper = []
+  if (el[0] !== undefined) {
+upper.push(el[0].toUpperCase())
+  }
+const lower = el.slice(1)
+const nameString = upper.toString()+lower.toLowerCase()
+nameFormat.push(nameString)
+})
+return nameFormat.join(" ")
+})
+const lastNameEndsZ = titleCase.filter((person)=>{
+const p=person.split(" ")
+return p[1].at(-1) !=="z"
+})
+const message =lastNameEndsZ.map((person) => `Hello ${person}! Please sign up!`)
+return message
+} 
+console.log("challenge for last challenge", question(names));
+
 ///////////////////////////////////////////////////////////////////////////////
 //// put your answers above if you wish to do the challenges on your own //////
 ///////////////////////////////////////////////////////////////////////////////
