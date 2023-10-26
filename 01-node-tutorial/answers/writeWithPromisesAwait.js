@@ -1,15 +1,12 @@
-const { writeFile, readFile } = require("fs").promises;
+const { readFile, writeFile } = require("fs").promises;
 
 const filePath = "./temporary/temp.txt";
 
 const writer = async () => {
   try {
-    const first = await readFile("./content/first.txt", "utf8");
-    const second = await readFile("./content/second.txt", "utf8");
-    const third = await readFile("./content/third.txt", "utf8");
     await writeFile(
         filePath,
-        `THE RESULT:\n ${first}\n ${second}\n ${third}`,
+        `THE RESULT:\n first\n second\n third`,
         { flag: "a" }
     );
     console.log("File 'temp.txt' has been created");
