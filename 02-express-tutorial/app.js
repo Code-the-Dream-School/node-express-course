@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 app.use('/api/v1/people', express.static('./methods-public')); 
-app.use('/api/v1/home', express.static('./public'));
+app.use('/api/v1', express.static('./public'));
 app.use(express.urlencoded( {extended: false} ));
 app.use(express.json());
 app.use(cookieParser());
