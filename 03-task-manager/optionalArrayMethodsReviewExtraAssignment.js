@@ -154,6 +154,35 @@ const names = [
   'Amy You'
 ];
 
+// Last names only
+const lastN = names.map(last=>{
+  const lenOfName = last.split(' ').length-1
+  return last.split(' ')[lenOfName]
+})
+console.log(lastN)
+
+// first name last name format only
+const regex = /[a-z] [a-z]/gi
+const filteredNames = names.filter(name=>regex.test(name))
+console.log(filteredNames)
+
+// names are in title case format
+const splitNames = names.map(name => name.split(' '))
+const upperCasedNames = splitNames.map(name => {
+    let newName = ''
+    for (const n of name) {
+        if (n.length > 0) {
+            newName += n[0].toUpperCase() + n.slice(1).toLowerCase() + ' '
+        }
+    }
+    return newName.trim()
+})
+console.log(upperCasedNames)
+
+// no last names with z at the end with message to sign up
+const noZinName = upperCasedNames.filter(name => name[name.length - 1] !== 'z')
+noZinName.push("Don't forget to sign up!!!")
+console.log(noZinName)
 ///////////////////////////////////////////////////////////////////////////////
 //// put your answers above if you wish to do the challenges on your own //////
 ///////////////////////////////////////////////////////////////////////////////
