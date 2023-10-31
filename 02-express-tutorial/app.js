@@ -1,77 +1,77 @@
-const express = require("express")
+const express = require("express");
+//Optional Additional Assignment
+cookieParser = require("cookie-parser");
 
-const app = express()
-//exercise 8
-const { products } = require("./data");
-//exercise 4
-app.use(express.static("./public"))
-//exercise 7
-app.get("/api/v1/test", (req, res)=> {
-res.status(200).json({ message: "It worked!" })
-})
+const app = express();
+app.use(cookieParser());
 
-app.get("/api/v1/products", (req, res)=> {
-res.status(200).json( products )
-})
+const peopleRouter = require("./routes/people");
+const productsRouter = require("./routes/products");
 
-app.get("/api/v1/products/:productID", (req, res)=> {
-    //exercise 9
-//res.status(200).json(req.params) 
-//exercise 10
-  const idToFind = parseInt(req.params.productID); // parseInt will convert a string to an integer
-  console.log(idToFind)
-const product = products.find((p) => p.id === idToFind); 
-//exercise 11
-if(!product) {
-    return res.status(404).json({ message: "That product was not found."})
-} 
-return res.status(200).json(product)
-})
-//exercise 12
-app.get("/api/v1/query", (req, res)=> {
-    console.log(req.query)
-    const {search, limit,priceLessThan} = req.query
-    let sortedItems = [...products]
-    if(search){
-        sortedItems=sortedItems.filter((product)=> {
-        return product.name.startsWith(search)
-        })
-    }
-    if(limit){
-         sortedItems=sortedItems.slice(0, Number(limit))
-    } 
-    //exercise 13
-    if(priceLessThan){
-         sortedItems=sortedItems.filter((product)=>{
-        return product.price<priceLessThan
-        })
-    }
-    // if(sortedItems.length<1){
-    //     // res.status(200).send("no products match your search")
-    //    return  res.status(200).json({success: true, msg: "no items founded"})
-    // }
-    return  res.status(200).json({success: true, data: sortedItems})
-//   return  res.status(200).json(sortedItems)
-    // res.send("hello world")
+//create a middleware function logger
+const logger = (req, res, next) => {
+  const method = req.method;
+  const url = req.url;
+  const time = new Date().toTimeString();
+  console.log(method, url, time);
+  next();
+};
 
-})
+const auth = (req, res, next) => {
+  if (!req.cookies.name) {
+    res.status(401).json({ success: false, msg: "Unauthorized" });
+  } else {
+    req.user = req.cookies.name;
+    next();
+  }
+};
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-//exercise 4
-// app.post()
-//exercise 6
-app.all("*", (req,res)=> {
-    res.status(404).send("Page not found")
-})
+//" take the logger call out of your app.get() statement, and call it via app.use(), for all paths, instead. Verify that it still works."
+app.use(logger);
+//" Change the directory for your static serving from ./public to ./methods-public, and try out that frontend from your browser."
 
-app.listen(3000, ()=> {
-console.log('Express Tutorial')
-})
+app.use(express.static("./methods-public"));
+// app.use(express.static("./public"))
 
+app.use("/api/v1/people", peopleRouter);
+app.use("/api/v1/products", productsRouter);
 
-// The require statement to import the express module
-// Creation of the app as returned from calling express()
-// app.use statements for the middleware. You’ll eventually use many kinds of middleware, but for now the only middleware we are using is express.static().
-// app.get and app.post statements for the routes you will handle. Eventually these will be refactored into router modules, but for now you can put them inline.
-// An app.all statement after these to handle page not found conditions.
-// An app.listen statement to tell the server to listen for requests on a particular port.
+//"Call your logger using the first method, in one of your app.get() statements, and verify that it works. "
+// app.get("/api/v1/test", logger, (req, res)=> {
+
+app.post("/login", (req, res) => {
+  if (!req.body.name) {
+    res.status(400).json({ success: false, message: "Please provide a name" });
+  } else {
+    res.status(201).send(`Welcome ${req.body.name}`);
+  }
+});
+
+app.get("/test", auth, (req, res) => {
+  res.status(200).json({ success: true, message: `Welcome ${req.user}` });
+});
+
+app.post("/logon", (req, res) => {
+  if (!req.body.name) {
+    res.status(400).json({ success: false, message: "Please provide a name" });
+  } else {
+    res.cookie("name", req.body.name);
+    res.status(201).send(`Hello ${req.body.name}`);
+  }
+});
+
+app.delete("/logoff", (req, res) => {
+  res.clearCookie("name");
+  res.status(200).send("The user is logged off");
+});
+
+app.all("*", (req, res) => {
+  res.status(404).send("Page not found");
+});
+
+app.listen(3000, () => {
+  console.log("Express Tutorial");
+});
