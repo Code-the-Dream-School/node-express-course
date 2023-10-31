@@ -13,8 +13,8 @@ const {
 
 router.get("/", getProducts);
 
-router.get("/:productID", getProduct);
-
 router.get("/query", findProduct);
+
+router.get("/:productID", getProduct);
 
 module.exports = router;
