@@ -22,13 +22,13 @@ const findProduct = (req, res) => {
       return product.name.startsWith(search);
     });
   }
-  if (limit) {
-    sortedItems = sortedItems.slice(0, Number(limit));
-  }
   if (priceLessThan) {
     sortedItems = sortedItems.filter(product => {
       return product.price < priceLessThan;
     });
+  }
+  if (limit) {
+    sortedItems = sortedItems.slice(0, Number(limit));
   }
   if (sortedItems.length < 1) {
     return res.status(200).json({ success: true, data: [] });

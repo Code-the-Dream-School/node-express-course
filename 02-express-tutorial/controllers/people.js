@@ -45,10 +45,13 @@ deletePerson = (req, res) => {
       .status(404)
       .json({ success: false, msg: `no person with id ${req.params.id}` });
   }
-  const newPeople = people.filter(
-    person => person.id !== Number(req.params.id)
-  );
-  return res.status(200).json({ success: true, data: newPeople });
+  index = people.findIndex(person => person.id === Number(req.params.id));
+  people.splice(index, 1);
+  return res.status(200).json({ success: true, data: people });
+  // const newPeople = people.filter(
+  //   person => person.id !== Number(req.params.id)
+  // );
+  // return res.status(200).json({ success: true, data: newPeople });
 };
 
 module.exports = {
