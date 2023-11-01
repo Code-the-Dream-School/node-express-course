@@ -34,7 +34,7 @@ const object = {
   behavior: function() {
     // "this" is a reference to the object we are inside of right now
     this.data++;
-    console.log('OOP demo:', this.data);
+    // console.log('OOP demo:', this.data);
   }
 }
 
@@ -76,8 +76,8 @@ object.behavior()
 // - Array.prototype.forEach
 //   - `forEach` is like a "for" loop. It calls the callback for every item in
 //     the array
-   evenNumbers.forEach((thingy) => console.log('even', thingy));
-   doubles.forEach((d) => console.log('doubled!', d));
+  //  evenNumbers.forEach((thingy) => console.log('even', thingy));
+  //  doubles.forEach((d) => console.log('doubled!', d));
 
 // - Array.prototype.reduce
 //   - A bit tricky
@@ -87,7 +87,7 @@ object.behavior()
   const totalLettersInNames = lastNames.reduce((runningTotal, currentName) => {
     return runningTotal + currentName.length;
   }, initialValue)
-  console.log({totalLettersInNames});
+  // console.log({totalLettersInNames});
 
   // The first argument is always the return value that we're building up.
   // I called it, "runningTotal" before. The default name is "accumulator."
@@ -100,8 +100,8 @@ object.behavior()
   }, {} /* second arg is always the initial value! Here, it's an empty object */);
 
   // Now we can lookup people by id!
-  console.log({lookedUpPerson1: peopleIdMap[1]})
-  console.log({lookedUpPerson2: peopleIdMap[2]});
+  // console.log({lookedUpPerson1: peopleIdMap[1]})
+  // console.log({lookedUpPerson2: peopleIdMap[2]});
 
   // Sometimes, you'll see this fancy syntax used with reduce, especially when
   // building mappings. Beware, though, there's a lot of unnecessary runtime
@@ -114,8 +114,8 @@ object.behavior()
   }), {});
 
   // Now we can lookup people by name!
-  console.log({lookupTim: peopleNameMap['tim']})
-  console.log({lookupJane: peopleNameMap['jane']});
+  // console.log({lookupTim: peopleNameMap['tim']})
+  // console.log({lookupJane: peopleNameMap['jane']});
 
 /////////////////////////// CHALLENGES ////////////////////////////////////////
 
@@ -155,33 +155,33 @@ const names = [
 ];
 
 // Last names only
-const lastN = names.map(last=>{
+const lastName = names.map(last=>{
   const lenOfName = last.split(' ').length-1
   return last.split(' ')[lenOfName]
 })
-console.log(lastN)
+console.log(`Last Names: ${lastName}`)
 
 // first name last name format only
-const regex = /[a-z] [a-z]/gi
-const filteredNames = names.filter(name=>regex.test(name))
-console.log(filteredNames)
+const regx = /^\w+ \w+$/
+const filteredNames = names.filter(name => regx.test(name))
+console.log(`<first> <last> format: ${filteredNames}`)
 
-// names are in title case format
-const splitNames = names.map(name => name.split(' '))
+// names are filtered out without format
+const splitNames = names.filter(name => regx.test(name))
 const upperCasedNames = splitNames.map(name => {
     let newName = ''
-    for (const n of name) {
+    for (const n of name.split(' ')) {
         if (n.length > 0) {
             newName += n[0].toUpperCase() + n.slice(1).toLowerCase() + ' '
         }
     }
     return newName.trim()
 })
-console.log(upperCasedNames)
+console.log(`Title Case: ${upperCasedNames}`)
 
 // no last names with z at the end with message to sign up
 const noZinName = upperCasedNames.filter(name => name[name.length - 1] !== 'z')
-noZinName.push("Don't forget to sign up!!!")
+.map(n => `${n}, Dont forget to sign up!!!`)
 console.log(noZinName)
 ///////////////////////////////////////////////////////////////////////////////
 //// put your answers above if you wish to do the challenges on your own //////
@@ -206,7 +206,7 @@ const everyonesLastName = names.map((name) => {
   const lastName = eachWordSeparated.pop();
   return lastName;
 });
-console.log('everyone last name', everyonesLastName);
+// console.log('everyone last name', everyonesLastName);
 
 //////// CHALLENGE: Filter to the people who followed the right
 // "right format" is "<first name> <last name>" with a single space!
@@ -214,7 +214,7 @@ const rightFormat = /^\w+ \w+$/;
 const matchesTeachersPedanticFormattingRule = names.filter((name) => {
   return name.match(rightFormat);
 });
-console.log('good students', matchesTeachersPedanticFormattingRule)
+// console.log('good students', matchesTeachersPedanticFormattingRule)
 // (joke :)
 
 
@@ -244,7 +244,7 @@ const titledNames = names.map((name) => {
   });
   return titledName.join(" ")
 });
-console.log('titledNames', titledNames);
+// console.log('titledNames', titledNames);
 
 // Same example as above (change every name to title case), but I'll break it
 // up into smaller pieces to make it more readable. Each callback function
@@ -325,10 +325,10 @@ const transformNameIntoTitleCase = (name) => {
   return titleCaseWords.join(' ');
 }
 
-console.log(
-  'titledNames verbose',
-  names.map(transformNameIntoTitleCase)
-)
+// console.log(
+//   'titledNames verbose',
+//   names.map(transformNameIntoTitleCase)
+// )
 
 
 //////// CHALLENGE: Remove names with the wrong format
@@ -351,4 +351,4 @@ const result = names
     Want to buy my thing?
   `);
 
-console.log('result', result);
+// console.log('result', result);

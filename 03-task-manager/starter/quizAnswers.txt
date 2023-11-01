@@ -3,6 +3,11 @@
   Also, middleware can be used for all routes: app.use(MIDDLEWARE) or to a specific route:
   app.get('/route',MIDDLEWARE,(req,res)...)
 
+  That the format in which Middleware is applied is through the above formats. That is how one
+  would use Middleware in an Express application. Furthermore, Middleware is an express 
+  application that allows it to modify request and responses, therefore having control 
+  over the application.
+
 2.What does CRUD stand for? Create, Read, Update, Delete/Destroy
 
 3.You are careful to store your sensitive information in a .env file.
