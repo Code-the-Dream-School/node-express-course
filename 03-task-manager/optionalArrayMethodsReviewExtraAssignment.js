@@ -1,5 +1,7 @@
 // Review of JavaScript iterative Array methods (`.map`, `.filter` and `.forEach`)
 
+const { log } = require("console");
+
 // This is an optional extra assignment
 
 ///////////////////////////// Questions ///////////////////////////////////////
@@ -225,9 +227,12 @@ nameFormat.push(nameString)
 })
 return nameFormat.join(" ")
 })
+// const lastNameEndsZ = titleCase.filter((person)=>{
+// const p=person.split(" ")
+// return p[1].at(-1) !=="z"
+// })
 const lastNameEndsZ = titleCase.filter((person)=>{
-const p=person.split(" ")
-return p[1].at(-1) !=="z"
+return person.at(-1) !=="z"
 })
 const message =lastNameEndsZ.map((person) => `Hello ${person}! Please sign up!`)
 return message
