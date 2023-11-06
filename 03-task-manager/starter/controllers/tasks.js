@@ -1,5 +1,6 @@
 const Task = require("../models/task");
 const asyncWrapper = require("../middleware/async");
+const { createCustomError } = require("../errors/custom-error");
 
 const getAllTasks = asyncWrapper(async (req, res) => {
   //   try {
@@ -29,15 +30,19 @@ const createTask = asyncWrapper(async (req, res) => {
   //   }
 });
 
-const getTask = asyncWrapper(async (req, res) => {
+const getTask = asyncWrapper(async (req, res, next) => {
   //   res.json({ id: req.params.id });
   //   try {
   const { id: taskID } = req.params;
   const task = await Task.findOne({ _id: taskID });
   if (!task) {
-    return res
-      .status(404)
-      .json({ msg: `no task was found with id: ${taskID}` });
+    return next(createCustomError(`no task was found with id: ${taskID}`, 404));
+    // const error = new Error("Not found");
+    // error.status = 404;
+    // return next(error);
+    // return res
+    //   .status(404)
+    //   .json({ msg: `no task was found with id: ${taskID}` });
   }
   res.status(200).json({ task });
   //   } catch (error) {
@@ -51,9 +56,10 @@ const deleteTask = asyncWrapper(async (req, res) => {
   const { id: taskID } = req.params;
   const task = await Task.findOneAndDelete({ _id: taskID });
   if (!task) {
-    return res
-      .status(404)
-      .json({ msg: `no task was found with id: ${taskID}` });
+    return next(createCustomError(`no task was found with id: ${taskID}`, 404));
+    // return res
+    //   .status(404)
+    //   .json({ msg: `no task was found with id: ${taskID}` });
   }
   //here we see what was removed
   res.status(200).json({ task });
@@ -79,9 +85,10 @@ const updateTask = asyncWrapper(async (req, res) => {
     runValidators: true
   });
   if (!task) {
-    return res
-      .status(404)
-      .json({ msg: `no task was found with id: ${taskID}` });
+    return next(createCustomError(`no task was found with id: ${taskID}`, 404));
+    // return res
+    //   .status(404)
+    //   .json({ msg: `no task was found with id: ${taskID}` });
   }
   res.status(200).json({ task });
   //   } catch (error) {
