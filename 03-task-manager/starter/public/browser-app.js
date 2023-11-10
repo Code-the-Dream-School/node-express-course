@@ -9,12 +9,16 @@ const showTasks = async () => {
   try {
     const {
       data: { tasks },
+     
     } = await axios.get('/api/v1/tasks')
+      console.log(tasks)
     if (tasks.length < 1) {
+     
       tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>'
       loadingDOM.style.visibility = 'hidden'
       return
     }
+    console.log(tasks)
     const allTasks = tasks
       .map((task) => {
         const { completed, _id: taskID, name } = task
@@ -38,6 +42,7 @@ const showTasks = async () => {
       .join('')
     tasksDOM.innerHTML = allTasks
   } catch (error) {
+    console.log(error)
     tasksDOM.innerHTML =
       '<h5 class="empty-list">There was an error, please try later....</h5>'
   }
