@@ -17,9 +17,7 @@ form.addEventListener("submit", async e => {
     location.reload();
   } catch (error) {
     localStorage.removeItem("token");
-    const errorMessage = document.createElement("p");
-    errorMessage.innerHTML = error.response.data.msg;
-    errorMsg.appendChild(errorMessage);
+    errorMsg.innerHTML = error.response.data.msg;
     hello.innerHTML = "";
   }
 });
@@ -32,15 +30,12 @@ const showHello = async () => {
         Authorization: `Bearer ${token}`
       }
     });
-    const helloMessage = document.createElement("h1");
-    helloMessage.innerHTML = data.msg;
-    hello.appendChild(helloMessage);
+    hello.innerHTML = data.msg;
   } catch (error) {
-    const errorMessage = document.createElement("p");
     if (!error.response.data.msg.includes("unauthorized")) {
-      errorMessage.innerHTML = error.response.data.msg;
+      errorMsg.innerHTML = error.response.data.msg;
     }
-    errorMsg.appendChild(errorMessage);
+    errorMsg.innerHTML = "";
   }
 };
 

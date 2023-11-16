@@ -14,7 +14,6 @@ const logon = async (req, res) => {
 };
 
 const hello = async (req, res) => {
-  console.log(req.user);
   res.status(200).json({ msg: `Hello, ${req.user.name}` });
 };
 
