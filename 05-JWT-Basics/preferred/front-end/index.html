@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>logon</title>
+  </head>
+  <body>
+    <h1>Login here</h1>
+    <form
+      id="form"
+      style="
+        width: 90%;
+        display: flex;
+        flex-direction: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      "
+    >
+      <div style="display: flex; flex-direction: column; width: 35%">
+        <label for="name-input" class="label">name</label>
+        <input type="text" id="name-input" />
+      </div>
+      <div
+        class="form"
+        style="display: flex; flex-direction: column; width: 35%"
+      >
+        <label for="password" class="label">password</label>
+        <input type="password" id="password" />
+      </div>
+      <!-- <div class="text-small form-alert">there was an error</div> -->
+      <button
+        type="submit"
+        class="submit"
+        style="background-color: blue; color: yellow; width: 20%"
+      >
+        submit
+      </button>
+    </form>
+    <div id="error" style="color: red"></div>
+    <div id="hello" style="color: purple"></div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
