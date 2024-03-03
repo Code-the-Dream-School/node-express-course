@@ -1,64 +1,76 @@
-const http = require("http");
-var StringDecoder = require("string_decoder").StringDecoder;
+const http = require('http')
+var StringDecoder = require('string_decoder').StringDecoder
 
 const getBody = (req, callback) => {
-  const decode = new StringDecoder("utf-8");
-  let body = "";
-  req.on("data", function (data) {
-    body += decode.write(data);
-  });
-  req.on("end", function () {
-    body += decode.end();
-    const body1 = decodeURI(body);
-    const bodyArray = body1.split("&");
-    const resultHash = {};
-    bodyArray.forEach((part) => {
-      const partArray = part.split("=");
-      resultHash[partArray[0]] = partArray[1];
-    });
-    callback(resultHash);
-  });
-};
+	const decode = new StringDecoder('utf-8')
+	let body = ''
+	req.on('data', function (data) {
+		body += decode.write(data)
+	})
+	req.on('end', function () {
+		body += decode.end()
+		const body1 = decodeURI(body)
+		console.log(body1)
+		const bodyArray = body1.split('&')
+		const resultHash = {}
+		bodyArray.forEach((part) => {
+			console.log(part)
+			const partArray = part.split('=')
+			resultHash[partArray[0]] = partArray[1]
+		})
+		callback(resultHash)
+		console.log(resultHash)
+	})
+}
 
 // here, you could declare one or more variables to store what comes back from the form.
-let item = "Enter something below.";
+let backgroundColor = 'grey'
 
 // here, you can change the form below to modify the input fields and what is displayed.
 // This is just ordinary html with string interpolation.
 const form = () => {
-  return `
+	return `
   <body>
-  <p>${item}</p>
-  <form method="POST">
-  <input name="item"></input>
-  <button type="submit">Submit</button>
-  </form>
-  </body>
-  `;
-};
+  <body style="background-color: ${backgroundColor};">
+            <form method="POST">
+                <label for="colorSelector">Choose a background color:</label>
+                <select id="colorSelector" name="color">
+                    <option value="white">White</option>
+                    <option value="lightblue">Light Blue</option>
+                    <option value="lightgreen">Light Green</option>
+                    <option value="lightpink">Light Pink</option>
+                    <option value="lightyellow">Light Yellow</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </body>
+  `
+}
 
 const server = http.createServer((req, res) => {
-  console.log("req.method is ", req.method);
-  console.log("req.url is ", req.url);
-  if (req.method === "POST") {
-    getBody(req, (body) => {
-      console.log("The body of the post is ", body);
-      // here, you can add your own logic
-      if (body["item"]) {
-        item = body["item"];
-      } else {
-        item = "Nothing was entered.";
-      }
-      // Your code changes would end here
-      res.writeHead(303, {
-        Location: "/",
-      });
-      res.end();
-    });
-  } else {
-    res.end(form());
-  }
-});
+	console.log('req.method is ', req.method)
+	console.log('req.url is ', req.url)
+	if (req.method === 'POST') {
+		getBody(req, (body) => {
+			console.log('The body of the post is ', body)
+			// here, you can add your own logic
+			if (body['color']) {
+				backgroundColor = body['color']
+			}
+			// Your code changes would end here
+			res.writeHead(303, {
+				Location: '/',
+			})
+			res.end()
+		})
+	} else {
+		res.setHeader('Content-Type', 'text/html')
+		res.write(form())
+		res.end()
+	}
+})
 
-server.listen(3000);
-console.log("The server is listening on port 3000.");
+const PORT = 3000
+server.listen(PORT, () => {
+	console.log(`Server is running on http://localhost:${PORT}`)
+})
