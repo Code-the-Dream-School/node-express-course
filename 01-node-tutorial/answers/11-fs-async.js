@@ -1,5 +1,6 @@
 
 const { writeFile } = require("fs");
+
 console.log("at start");
 writeFile("./temporary/fileB.txt", "This is line 1\n", { flag :'a'},(err, result) => {
   console.log("at point 1");
