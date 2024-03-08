@@ -1,24 +1,24 @@
 const http = require("http");
 var StringDecoder = require("string_decoder").StringDecoder;
 
-const getBody = (req, callback) => {
-  const decode = new StringDecoder("utf-8");
-  let body = "";
-  req.on("data", function (data) {
-    body += decode.write(data);
-  });
-  req.on("end", function () {
-    body += decode.end();
-    const body1 = decodeURI(body);
-    const bodyArray = body1.split("&");
-    const resultHash = {};
-    bodyArray.forEach((part) => {
-      const partArray = part.split("=");
-      resultHash[partArray[0]] = partArray[1];
-    });
-    callback(resultHash);
-  });
-};
+// const getBody = (req, callback) => {
+//   const decode = new StringDecoder("utf-8");
+//   let body = "";
+//   req.on("data", function (data) {
+//     body += decode.write(data);
+//   });
+//   req.on("end", function () {
+//     body += decode.end();
+//     const body1 = decodeURI(body);
+//     const bodyArray = body1.split("&");
+//     const resultHash = {};
+//     bodyArray.forEach((part) => {
+//       const partArray = part.split("=");
+//       resultHash[partArray[0]] = partArray[1];
+//     });
+//     callback(resultHash);
+//   });
+// };
 
 // here, you could declare one or more variables to store what comes back from the form.
 let item = "Enter something below.";
