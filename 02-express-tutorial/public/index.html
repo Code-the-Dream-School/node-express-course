@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Products</h1>
+    <button id="fetch">Show products</button>
+    <div id="productsContainer"></div>
+    <script>
+      const fetchButton = document.getElementById("fetch");
+      const productsContainer = document.getElementById("productsContainer");
+      fetchButton.addEventListener("click", () => {
+        fetch("/api/v1/products", {
+          cache: "no-cache",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network error accured");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            let html = "";
+            data.forEach((product) => {
+              html += `<div>${product.id}: ${product.name}</div>`;
+            });
+            productsContainer.innerHTML = html;
+          })
+          .catch((err) => {
+            console.error("There was an error while fetching data");
+          });
+      });
+    </script>
+  </body>
+</html>
