@@ -1,0 +1,4 @@
+/node_modules
+.DS_Store
+/node_modules/answers/component/temp.txt
+/node_modules/answers/component/new-temp.txt

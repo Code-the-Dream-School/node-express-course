@@ -32,14 +32,13 @@ const form = () => {
 	return `
   <body>
   <body style="background-color: ${backgroundColor};">
+  <h2> New changes made</h2>
             <form method="POST">
                 <label for="colorSelector">Choose a background color:</label>
                 <select id="colorSelector" name="color">
                     <option value="white">White</option>
                     <option value="lightblue">Light Blue</option>
                     <option value="lightgreen">Light Green</option>
-                    <option value="lightpink">Light Pink</option>
-                    <option value="lightyellow">Light Yellow</option>
                 </select>
                 <button type="submit">Submit</button>
             </form>
@@ -69,6 +68,11 @@ const server = http.createServer((req, res) => {
 		res.end()
 	}
 })
+
+server.on('request', (req) => {
+	console.log('Event Received: ', req.method, req.url)
+})
+
 
 const PORT = 3000
 server.listen(PORT, () => {
