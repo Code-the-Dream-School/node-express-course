@@ -1,0 +1,113 @@
+[33m8d8dba5[m[33m ([m[1;36mHEAD -> [m[1;32mweek2[m[33m, [m[1;31morigin/week2[m[33m)[m NPM And Async Patterns
+[33m5e72690[m[33m ([m[1;31morigin/week1[m[33m, [m[1;32mweek1[m[33m)[m Resolved issues in 02,10 and 11 files
+[33m71f9db3[m answers for lesson 1
+[33m526b144[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #168 from Code-the-Dream-School/add-assignments
+[33md3f9af3[m add assignments, remove unwanted boilerplate
+[33m9662ccc[m Merge pull request #167 from Code-the-Dream-School/add-lessons
+[33ma8beccc[m add lesson materials
+[33m54d272a[m Merge pull request #56 from jdevries3133/alt_assignments
+[33m10a409f[m Merge pull request #82 from jdevries3133/array_methods_extra_assignment
+[33m7fd4ad7[m feat: array method review assignment
+[33mba02c54[m Merge pull request #93 from Code-the-Dream-School/lesson1mod
+[33m29a24c1[m fixed answers directory
+[33mc5eb753[m Update README.MD
+[33meb090de[m Update README.MD
+[33m2523962[m feat: apply Akosua's suggestions
+[33mfcec644[m feat: week 3 alt assignment
+[33mc9155d8[m revisions to lesson1
+[33m2b3bc80[m add client to front-end
+[33m3299f8a[m update front-end
+[33m98738a8[m Delete .DS_Store
+[33m85d39cf[m update front-end in 11
+[33mdc0635c[m removed some content from readme
+[33mf94091d[m switched deployment in jobster platform
+[33m103415e[m removed folder 12
+[33m28340b0[m 6.5-jobster-bug-fix
+[33mc2b0811[m 06.5-jobster-api complete
+[33md45f10d[m extra content to readme
+[33md6c6b7b[m removed yelp
+[33me7758db[m fixed readme
+[33mbeca9d9[m fixed small typo
+[33m18f1b80[m fix small bugs
+[33m8b7ec2f[m project complete
+[33mc337179[m updated readme
+[33mabe730d[m fixed readme
+[33md1c1003[m updated readme
+[33m1ba1ebf[m starting 11-auth-workflow
+[33m1a8801f[m small typo fixed
+[33m9d24791[m small bug in 10-e-commerce
+[33m3f2d000[m 10-e-commerce-complete
+[33mdcc8116[m express mongo sanitize added
+[33mcd6b274[m update readme
+[33m3c4199b[m updated readme
+[33m35d6154[m fixed bug and updated readme
+[33m47e82cb[m readme complete
+[33mdca2c39[m updated readme
+[33mdda4cf9[m updated readme
+[33me0de048[m front-end cookies example added
+[33m526bdb7[m updated readme
+[33md037143[m updated readme
+[33ma251ea9[m updated readme
+[33mb45e748[m updated readme in 10-e-commerce
+[33mffb4213[m 10-e-commerce-api readme updated
+[33m0b36d1a[m 10-e-commerce readme updated
+[33m97daa7d[m 10-e-commerce readme updated
+[33m459f0dc[m started recording 10 e-commerce
+[33ma369b14[m 06-jobs-api rate limiter update
+[33m84eddd7[m small changes in readme
+[33ma3cc21b[m entire structure added
+[33m0b3bf9b[m change 10 e-commerce final to 5000
+[33m79ef18f[m Some edits in readme
+[33m677ddd7[m 10-e-commerce-api
+[33m0b3f776[m 08-send-email re-recorded send email video
+[33mf2be733[m 09-stripe-payment complete
+[33m47f6f55[m 08-after-recording
+[33mcf9d7a4[m 07-file-upload after recording
+[33m67cb7bf[m images added to project 7
+[33m7ec199f[m update readme
+[33m2809dd5[m 09-stripe-payment
+[33m41176f7[m readme updated
+[33mf023295[m 08-send-email added
+[33ma7c0d3e[m 07-file-upload project complete
+[33m576659e[m docs added to 06-jobs-api
+[33m360d8e4[m added docs for jobs api
+[33m3b02767[m 06-jobs-api after recording
+[33mb4aeecf[m updated readme
+[33m7a653ed[m 06-jobs-api readme
+[33m5208ac2[m regex
+[33mad4b8d0[m switched to lowercase added numbers in readme
+[33m26806e5[m 06-jobs-api complete
+[33m81587eb[m fixed bugs in 03-task-manager
+[33ma63d4fc[m Bug fixes
+[33mf094ace[m 05-JWT-Basics changed final port to 5000
+[33m72a051f[m 05-JWT-BASICS After Record
+[33mc1f4791[m 04-store-api ready to go
+[33mb7c32c1[m small fix in the readme
+[33mb658016[m 03-set-back-to-basics
+[33m4cad47c[m 03-switched back to local setup
+[33m6c0e5c8[m 03-some changes in public html files
+[33m0249e97[m 03-task manager setup code added
+[33m3fd95a7[m 03-task-manager complete
+[33m0af8de1[m in 03-task-manager switched final to 500
+[33mb0eb3c4[m 3-task-manager-before-recording
+[33mb28dade[m fixed numbering
+[33m633383d[m IF,ELSE IF, ELSE BUG FIX
+[33m11d6aca[m changed to only two projects
+[33me52cd3f[m one more send
+[33md075000[m Express Tutorial Complete
+[33m65147d4[m middleware complete
+[33mffb5bbd[m changed to less folders
+[33m78dbca1[m 6 express router complete
+[33m741526e[m 6 complete
+[33m2c00657[m 5 complete
+[33me4dc208[m 5 complete
+[33md1e05cf[m 5-without put and delete
+[33m900a2ea[m 4-middleware-complete
+[33mc30d91d[m 2-express-basics complete
+[33m095c45e[m example starter added
+[33m9706a72[m a bit more testing
+[33ma2ab1e4[m node tutorial complete
+[33m7a471ab[m moved big file setup to proper location
+[33m68670ad[m testing big file
+[33m42c328f[m updated readme
+[33m6d82be8[m first commit
