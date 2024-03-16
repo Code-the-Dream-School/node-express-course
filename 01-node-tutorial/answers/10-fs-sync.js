@@ -1,20 +1,30 @@
 const { readFileSync, writeFileSync } = require('fs')
 
-// const fs = require('fs')
-// console.log(fs.readFileSync('../content/first.txt', 'utf8'));
 
-const firstFileBinary = readFileSync('../content/first.txt', 'binary')
-const firstFileUTF = readFileSync('../content/first.txt', 'utf8')
+// const firstFileBinary = readFileSync('../content/first.txt', 'binary')
+// const firstFileUTF = readFileSync('../content/first.txt', 'utf8')
+console.log('start')
+// console.log(firstFileBinary);
+// console.log(firstFileUTF);
 
-console.log(firstFileBinary);
-console.log(firstFileUTF);
+// const secondFile = readFileSync('../content/second.txt', 'utf8')
+// console.log(secondFile);
 
-const secondFile = readFileSync('../content/second.txt', 'utf8')
-console.log(secondFile);
-
-
+// Write 3 lines to fileA.txt, using "append" flag for lines after the first one
 writeFileSync(
-    '../content/results-sync.txt', `RRResult: ${firstFileUTF}, ${secondFile}.`,
-    // { flag: 'a' }
-    // upend the file with above command otherwise it will replace original file
+    './temporary/fileA.txt', 'First Line\n',
+    { flag: 'a' }
 )
+writeFileSync(
+    './temporary/fileA.txt', 'Second line\n', { flag: 'a' }
+);
+writeFileSync(
+    './temporary/fileA.txt', 'Third line\n', { flag: 'a' }
+);
+
+// Read the fileA.txt and log its contents to the console
+const fileContents = readFileSync('./temporary/fileA.txt', 'utf8');
+console.log('File contents:', fileContents);
+
+console.log('Done with this task');
+console.log('Starting the next one');
