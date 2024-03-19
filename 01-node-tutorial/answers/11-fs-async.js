@@ -1,9 +1,6 @@
 const { readFile, writeFile } = require('fs')
-console.log('Start 11-fa-Async.js');
 
-
-// Write the first line to fileB.txt
-writeFile('./temporary/fileB.txt', 'First line\n', { flag: 'a' }, (err) => {
+readFile('../content/first.txt', 'utf8', (err, result) => {
     if (err) {
         console.log('Error:', err);
     }
