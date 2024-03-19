@@ -3,26 +3,26 @@ const StringDecoder = require("string_decoder").StringDecoder;
 
 // Function to parse the request body
 const getBody = (req, callback) => {
-  const decoder = new StringDecoder("utf-8");
-  let body = "";
-  req.on("data", function (data) {
-    body += decoder.write(data);
-  });
-  req.on("end", function () {
-    body += decoder.end();
-    const bodyArray = body.split("&");
-    const resultHash = {};
-    bodyArray.forEach((part) => {
-      const [key, value] = part.split("=");
-      resultHash[key] = value;
+    const decoder = new StringDecoder("utf-8");
+    let body = "";
+    req.on("data", function (data) {
+        body += decoder.write(data);
     });
-    callback(resultHash);
-  });
+    req.on("end", function () {
+        body += decoder.end();
+        const bodyArray = body.split("&");
+        const resultHash = {};
+        bodyArray.forEach((part) => {
+            const [key, value] = part.split("=");
+            resultHash[key] = value;
+        });
+        callback(resultHash);
+    });
 };
 
 // Function to generate a random number between min and max
 const getRandomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // Generate a random number between 1 and 100
@@ -34,7 +34,7 @@ let message = "";
 
 // Function to generate HTML form
 const form = (message = "") => {
-  return `
+    return `
     <body>
       <h2>Number Guessing Game</h2>
       <p>${message}</p>
@@ -49,40 +49,40 @@ const form = (message = "") => {
 
 // Create an HTTP server
 const server = http.createServer((req, res) => {
-  if (req.method === "POST") {
-    // Process form submission
+    if (req.method === "POST") {
+        // Process form submission
 
 
-    getBody(req, (body) => {
-      const userGuess = parseInt(body["guess"]);
-      attempts++;
-      console.log('Randon Number:', randomNumber);
-      console.log('User Guess: ', userGuess);
+        getBody(req, (body) => {
+            const userGuess = parseInt(body["guess"]);
+            attempts++;
+            console.log('Randon Number:', randomNumber);
+            console.log('User Guess: ', userGuess);
 
-      if (!isNaN(userGuess)) {
-        if (userGuess === randomNumber) {
-          message = `Congratulations! You guessed the correct number (${randomNumber}) in ${attempts} attempts.`;
-        } else if (userGuess < randomNumber) {
-          message = "Sorry, your guess is too low. Try again!";
-        } else {
-          message = "Sorry, your guess is too high. Try again!";
-        }
-      } else {
-        message = "Please enter a valid number.";
-      }
+            if (!isNaN(userGuess)) {
+                if (userGuess === randomNumber) {
+                    message = `Congratulations! You guessed the correct number (${randomNumber}) in ${attempts} attempts.`;
+                } else if (userGuess < randomNumber) {
+                    message = "Sorry, your guess is too low. Try again!";
+                } else {
+                    message = "Sorry, your guess is too high. Try again!";
+                }
+            } else {
+                message = "Please enter a valid number.";
+            }
 
-      // Display form with updated message
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(form(message));
-    });
-  } else {
-    // Display initial form
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(form());
-  }
+            // Display form with updated message
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.end(form(message));
+        });
+    } else {
+        // Display initial form
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(form());
+    }
 });
 
 // Listen for incoming requests on port 3000
 server.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+    console.log('Server is running on http://localhost:3000');
 });
