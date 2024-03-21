@@ -1,4 +1,5 @@
-const { writeFile, readFile } = require("fs").promises;
+const { writeFile } = require("fs").promises;
+const { readFile } = require("fs").promises
 
 console.log(' Start write with Promises .then() file.js');
 

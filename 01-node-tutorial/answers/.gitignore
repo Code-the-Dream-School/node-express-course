@@ -2,3 +2,6 @@
 /content/big.txt
 answers/temporary/*
 !answers/temporary/.keep
+.DS_Store  
+
+temp.txt

@@ -82,6 +82,12 @@ const server = http.createServer((req, res) => {
     }
 });
 
+// Adding event listener to the 'request' event
+server.on("request", (req) => {
+    console.log("Event received:", req.method, req.url);
+});
+
+// comment to check nodemon is workinh properly
 // Listen for incoming requests on port 3000
 server.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
