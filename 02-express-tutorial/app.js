@@ -1,11 +1,33 @@
 const express = require("express");
 const app = express();
-const { products } = require("./data");
+const { products, people } = require("./data");
+const peopleRouter = require("./routes/people");
+//parse post request body
+app.use(express.urlencoded({ extended: false }));
+//parse json
+app.use(express.json());
 // middleware
-app.use(express.static("./public"));
+app.use(express.static("./methods-public"));
+//people router
+app.use("/api/v1/people", peopleRouter);
+//logger middleware
+const logger = (req, res, next) => {
+  const { method, url } = req;
+  const time = new Date().getHours();
+  console.log(method, url, time);
+  next();
+};
 //test url
-app.get("/api/v1/test", (req, res) => {
+app.get("/api/v1/test", logger, (req, res) => {
   res.json({ message: "It worked!" });
+});
+//login
+app.post("/login", (req, res) => {
+  const name = req.body.name;
+  if (name) {
+    res.status(200).send(`Welcom ${name}`);
+  }
+  res.status(401).send("Please provide the Credentials ");
 });
 //all products
 app.get("/api/v1/products", (req, res) => {
@@ -42,6 +64,20 @@ app.get("/api/v1/query", (req, res) => {
   }
   res.json(searchedProduct);
 });
+
+//==============People==================
+// app.get("/api/v1/people", (req, res) => {
+//   res.json(people);
+// });
+
+// app.post("/api/v1/people", (req, res) => {
+//   const { name } = req.body;
+//   if (!name) {
+//     res.status(400).json({ success: false, message: "Please provide a name" });
+//   }
+//   people.push({ id: people.length + 1, name: name });
+//   res.status(201).json({ success: true, name: name });
+// });
 //not found response
 app.all("*", (req, res) => {
   res.status(404).send("Page not found");
