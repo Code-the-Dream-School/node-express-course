@@ -69,39 +69,3 @@ app.all('not-there', (req, res) => {
 app.listen(3000, () => {
 	console.log('The server is running...')
 })
-
-// const http = require('http')
-// const { readFileSync } = require('fs')
-
-// const homePage = readFileSync('./public/index.html')
-
-// const server = http.createServer((req, res) => {
-// 	const url = req.url
-// 	if (url === '/') {
-// 		res.writeHead(200, { 'content-type': 'text/html' })
-// 		res.write(homePage)
-// 		res.end()
-// 	} else if (url === '/products') {
-// 		res.writeHead(200, { 'content-type': 'text/html' })
-// 		res.write('<h3>Product selection</h3>')
-// 		res.end()
-// 	} else if (url === '/cart') {
-// 		res.writeHead(200, { 'content-type': 'text/html' })
-// 		res.write('<h3>Your cart is empty</h3>')
-// 		res.end()
-// 	} else if (url === '/contact') {
-// 		res.writeHead(200, { 'content-type': 'text/html' })
-// 		res.write('<h3>Phone number</h3>')
-// 		res.write('<h3>Email</h3>')
-// 		res.write('<h3>Address</h3>')
-// 		res.end()
-// 	} else if (url === '/api/v1/test') {
-// 		res.json({ message: 'It worked successfully!' })
-// 	} else if (url === '/not-there') {
-// 		res.writeHead(404, { 'content-type': 'text/html' })
-// 		res.write('<h3>404 error</h3>')
-// 		res.end()
-// 	}
-// })
-
-// server.listen(5000)
