@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="fetchProductsBtn">Fetch Products</button>
+    <div id="productsContainer"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fetchProductsBtn = document.getElementById('fetchProductsBtn');
+            const productsContainer = document.getElementById('productsContainer');
+
+            fetchProductsBtn.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/api/v1/products');
+                    const products = await response.json();
+
+                    // Clear previous products
+                    productsContainer.innerHTML = '';
+
+                    // Append fetched products to the container
+                    products.forEach(product => {
+                        const productElement = document.createElement('div');
+                        productElement.textContent = `${product.name} - $${product.price}`;
+                        productsContainer.appendChild(productElement);
+                    });
+                } catch (error) {
+                    console.error('Error fetching products:', error);
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
