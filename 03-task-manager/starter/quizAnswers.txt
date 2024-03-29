@@ -1,0 +1,38 @@
+Q. 1) Quickly explain how middleware is used in an express application.
+Ans => Middleware acts a a bridge between the incoming client requests and outgoing server responses.
+Middleware is used in express to perform logging, authentication, authorization, error handling, request parsing, response formatting.
+Following middleware function are used to add middleware  to express application 
+1) app.use()
+2) app.get()
+3) app.post() etc
+It get executed in the order they are added
+
+Q. 2) What does CRUD stand for?
+ans => CRUD stands for Create, Read, Update, and  Delete.
+Main four basic operations allow you to manipulate data within MongoDB collections.
+Create => Add new entries.The create operation involves inserting new documents into a MongoDB collection. (insertOne(), insertMany() method used to insert JSON-like object into a collection)
+Read  => Retrieve, search, or view existing entries.
+ It involves retrieving documents from a MongoDB collection.
+  You can retrieve documents based on certain criteria using the find() method.
+   You can also retrieve a single document using the findOne() method.
+Update => update or edit existing entries
+It involves modifying existing documnets in a MongoDB collection.
+You can update documents based on certain criteria using the updateOne() or updateMany() method. 
+You can also replace an entire documents using the replaceOne() method.
+
+Delete => delete, deactivate, or remove existing entries
+It involves removing documents from an MongoDB collection.
+You can delete documents based on certain criteria using the deleteOne() or deleteMany() method.
+
+q. 3) You are careful to store your sensitive information in a .env file.
+1) How do you get your app to access the information in the .env file?
+ans =>  To get your app to access the information in the .env file you needd to follow following steps :
+- Install dotenv (npm install dotenv)
+- create a .env file in the root directory of your project.
+- Load environment variables using require('dotenv').config();
+- Access environment variables eg. const dbUser = process.env.DB_USER;
+
+2) How do you protect the contents of the .env file so that it is not stored in your Github repository?
+ans => - Add .env to .gitignore
+- Use environment variable
+- set up environment variables in your hosting environment
