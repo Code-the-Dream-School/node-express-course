@@ -7,6 +7,8 @@ const formAlertDOM = document.querySelector('.form-alert')
 const showTasks = async () => {
   loadingDOM.style.visibility = 'visible'
   try {
+    // let test = await  axios.get('/api/v1/tasks')
+    // console.log(test)
     const {
       data: { tasks },
     } = await axios.get('/api/v1/tasks')
@@ -38,8 +40,9 @@ const showTasks = async () => {
       .join('')
     tasksDOM.innerHTML = allTasks
   } catch (error) {
+    // console.log(error)
     tasksDOM.innerHTML =
-      '<h5 class="empty-list">There was an error, please try later....</h5>'
+      '<h5 class="empty-list">There was an error, please try again later....</h5>'
   }
   loadingDOM.style.visibility = 'hidden'
 }
@@ -77,6 +80,7 @@ formDOM.addEventListener('submit', async (e) => {
     formAlertDOM.textContent = `success, task added`
     formAlertDOM.classList.add('text-success')
   } catch (error) {
+    
     formAlertDOM.style.display = 'block'
     formAlertDOM.innerHTML = `error, please try again`
   }
