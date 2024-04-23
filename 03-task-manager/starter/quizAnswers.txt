@@ -1,0 +1,11 @@
+Quickly explain how middleware is used in an Express application?
+middleware is a function that has access to the req and res objects and you can bring changes to these objects. It can execute the code and also end a req & res cycle. 
+
+What does CRUD stand for?
+CRUD stands for Create, Read, Update and Delete that usually used in databases.
+
+How do you get your app to access the information in the .env file?
+I access to the information which is in my .env through "process.env object.
+
+How do you protect the contents of the .env file so that it is not stored in your Github repository?
+I added my .env file to .gitignore that way my .env file will be ignored when I add, commit and push my code to gitHub.

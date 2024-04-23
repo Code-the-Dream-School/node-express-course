@@ -62,7 +62,7 @@ object.behavior()
 //     element becomes a member of the new array. If the return value is false,
 //     the element is filtered (removed).
    const integers = [1, 2, 3, 4, 5];
-   // evenNumbers will be interger % 2 for each integer
+   // evenNumbers will be integer % 2 for each integer
    const evenNumbers = integers.filter((integer) => {
      return integer % 2 === 0
    })
