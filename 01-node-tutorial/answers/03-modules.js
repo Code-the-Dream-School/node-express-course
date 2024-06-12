@@ -1,5 +1,5 @@
-const names = require("./04-names.js");
-const message = require("./05-ultis.js");
+const names = require("./04-names");
+const message = require("./05-ultis");
 
 
 message (names.safiya);
