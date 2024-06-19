@@ -1,5 +1,4 @@
-const fs = require('fs');
-fs.writeFile();
+const { writeFile } = require("fs");
 console.log("at start");
 
 writeFile(
