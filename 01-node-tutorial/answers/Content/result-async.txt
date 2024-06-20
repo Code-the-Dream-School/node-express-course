@@ -1,0 +1,1 @@
+Here is the result-async : Hello, this is the first text!, Hi there, this is the second text!

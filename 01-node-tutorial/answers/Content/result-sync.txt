@@ -1,0 +1,2 @@
+Here is the result from combining the first and second txts files: Hello, this is the first text!, Hi there, this is the second text!Here is the result from combining the first and second txts files: Hello, this is the first text!, Hi there, this is the second text!Here is the result from combining the first and second txts files: 
+Hello, this is the first text!, Hi there, this is the second text!
