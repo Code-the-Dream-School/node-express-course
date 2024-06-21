@@ -1,7 +1,6 @@
 const http = require("http");
 var StringDecoder = require("string_decoder").StringDecoder;
 const { colors } = require('./colors.js');
-const { randomInt } = require('crypto');
 
 const getBody = (req, callback) => {
   const decode = new StringDecoder("utf-8");
