@@ -17,7 +17,7 @@ console.log(`Filename: ${__filename}`);
 console.log(`Dirname: ${__dirname}`)
 // this prints the following, so to the above folder answers /Users/sarahdapkiewicz/Desktop/NodeExpress/CTD/CTDRepoFork/node-express-course/01-node-tutorial/answers
 console.log(`Process: ${process.env.MY_VAR}`)
-//Question : process is undefiend, should give the path node 
+//QUESTION : process is undefiend, should give the path node 
 
 
 //We have access to setInterval and setTimeout 

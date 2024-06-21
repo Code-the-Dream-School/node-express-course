@@ -9,7 +9,7 @@ const posWords = (name) => {
 //test that it works 
 // posWords('holly'); 
 
-module.exports = posWords;
+module.exports = posWords
 //export function 
 
 

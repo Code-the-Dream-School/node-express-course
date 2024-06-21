@@ -1,10 +1,12 @@
 // async method, aka non-blocking with callback
 //This is callback hell, will be better way! 
+// we will be using promises and async await later 
 
 const { readFile, writeFileSync } = require("fs");
 
 console.log("at the start of async callback")
 
+//this is offloaded doesnt stall application 
 readFile('./temporary/first.txt', 'utf8', (err, result)=>{
   if(err){
     console.log(err)

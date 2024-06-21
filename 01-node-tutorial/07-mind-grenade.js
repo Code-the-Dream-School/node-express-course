@@ -6,3 +6,6 @@ function addValues() {
 }
 
 addValues()
+
+// This is to demonstrate that when a module is loaded with a require statement, 
+// anything in the mainline code of the loaded module runs
