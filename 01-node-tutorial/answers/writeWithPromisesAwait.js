@@ -1,59 +1,48 @@
 const { writeFile, readFile } = require("fs").promises;
-
-console.log("point 1");
+const destination = "./temporary/file.txt";
 
 async function writer() {
   try {
-    const writeA = await writeFile(
-      "./temporary/file.txt",
+    await writeFile(
+      destination,
       `This is the First Line. `
     );
-    const writeB = await writeFile(
-      "./temporary/file.txt",
+    await writeFile(
+      destination,
       `This is the Second Line. `,
       {
         flag: "a",
       }
     );
-    const writeC = await writeFile(
-      "./temporary/file.txt",
+    await writeFile(
+      destination,
       `This is the Third Line. `,
       {
         flag: "a",
       }
     );
-    console.log(writeA, "written");
-    console.log(writeB, "written");
-    console.log(writeC, "written");
   } catch (error) {
     console.log("Something Went Wrong : ", error);
   }
 }
 
-console.log("point 2");
-
-async function reader() {
+async function reader(inputFile) {
   try {
-    const str = await readFile;
+    const str = await readFile(inputFile, 'utf8');
     console.log(str);
   } catch (error) {
     console.log("Something Went Wrong : ", error);
   }
 }
 
-console.log("point 3");
 
-async function readWrite() {
+async function readWrite(inputFile) {
   try {
-    await reader;
-    await writer;
+    await writer();
+    await reader(inputFile);
   } catch (error) {
     console.log("Something Went Wrong : ", error);
   }
 }
 
-console.log("point 4");
-
-readWrite();
-
-console.log("point 5");
+readWrite(destination);
