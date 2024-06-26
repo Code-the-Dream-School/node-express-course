@@ -8,3 +8,5 @@ sayHi(names.safiya);
 
 const data = require('./06-alternative-flavor');
 console.log(data);
+
+require('./07-mind-grenade');
