@@ -1,0 +1,14 @@
+{
+  "name": "answers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "prompter.js",
+  "scripts": {  
+    "test": "echo \"Error: no test specified\" && exit 1",  
+    "dev": "nodemon prompter.js",  
+    "start": "node prompter.js"  
+  },  
+  "keywords": [],
+  "author": "Sarah Dapkiewicz",
+  "license": "ISC"
+}

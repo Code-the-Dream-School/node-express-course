@@ -21,13 +21,13 @@ const getBody = (req, callback) => {
 };
 
 // here, you could declare one or more variables to store what comes back from the form.
-let item = "Enter something below.";
+let item = "Enter a color to change this paragraph color.";
 
 // here, you can change the form below to modify the input fields and what is displayed.
 // This is just ordinary html with string interpolation.
 const form = () => {
   return `
-  <body>
+  <body style="color: ${item};">
   <p>${item}</p>
   <form method="POST">
   <input name="item"></input>
@@ -60,5 +60,10 @@ const server = http.createServer((req, res) => {
   }
 });
 
+server.on("request", (req) => {  
+  console.log("event received: ", req.method, req.url);  
+});  
+
 server.listen(3000);
 console.log("The server is listening on port 3000.");
+
