@@ -40,6 +40,7 @@ const object = {
 
 // Every time we call `.behavior()`, the data (number) inside `object` is
 // incremented by 1, so we print "OOP demo 1", "OOP demo 2", etc.
+
 object.behavior()
 object.behavior()
 object.behavior()
@@ -61,11 +62,13 @@ object.behavior()
 //   - The callback should return a boolean. If the return value is true, the
 //     element becomes a member of the new array. If the return value is false,
 //     the element is filtered (removed).
-   const integers = [1, 2, 3, 4, 5];
-   // evenNumbers will be interger % 2 for each integer
-   const evenNumbers = integers.filter((integer) => {
-     return integer % 2 === 0
-   })
+
+  const integers = [1, 2, 3, 4, 5];
+// evenNumbers will be interger % 2 for each integer
+// '%' is the "modulo" operator. Here we are checking if `integer` divided by 2, leaves a remainder of 0, which is true for even numbers and false for odd numbers.
+  const evenNumbers = integers.filter((integer) => {
+    return integer % 2 === 0
+  })
 
 // - Array.prototype.map
 //   - The callback recieves each item of the array. The return value is pushed
