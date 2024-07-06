@@ -8,8 +8,8 @@ app.use(express.static('./public'))
 
 // app.get('/', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, './navbar-app/index.html'))
-//   adding to static assets
-//   SSR
+//   adding to static assets in public 
+//   OR SSR server side rendering with the templating engine 
 // })
 
 app.all('*', (req, res) => {

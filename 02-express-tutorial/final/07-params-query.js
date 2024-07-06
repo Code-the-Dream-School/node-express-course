@@ -5,6 +5,8 @@ const { products } = require('./data')
 app.get('/', (req, res) => {
   res.send('<h1> Home Page</h1><a href="/api/products">products</a>')
 })
+
+//this gets specific parts of the product, use destructuring, just getting parts of the 
 app.get('/api/products', (req, res) => {
   const newProducts = products.map((product) => {
     const { id, name, image } = product
@@ -13,9 +15,12 @@ app.get('/api/products', (req, res) => {
 
   res.json(newProducts)
 })
+
+//only ONE ITEM EX :productID can be called whatever you want
+//this can get wayyy more complex
 app.get('/api/products/:productID', (req, res) => {
-  // console.log(req)
-  // console.log(req.params)
+  // console.log(req) - this is a giant object 
+  // console.log(req.params) - always comes back as a string, have to change to a number 
   const { productID } = req.params
 
   const singleProduct = products.find(
@@ -27,7 +32,7 @@ app.get('/api/products/:productID', (req, res) => {
 
   return res.json(singleProduct)
 })
-
+//more complex example 
 app.get('/api/products/:productID/reviews/:reviewID', (req, res) => {
   console.log(req.params)
   res.send('hello world')

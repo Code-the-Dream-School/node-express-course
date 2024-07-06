@@ -4,6 +4,7 @@ const path = require('path')
 const app = express()
 
 // setup static and middleware
+//must be above .get , static is the method, make a public folder with static items. methods-public 
 app.use(express.static('./public'))
 
 app.get('/', (req, res) => {
