@@ -1,14 +1,39 @@
 console.log("Express Tutorial");
 
+//Requires
 const express = require(`express`);
-// const path = require(`path`);
 const app = express();
-const { products } = require("./data");
+const { products, people } = require("./data");
 
+//Middleware
+const logger = (req, res, next) => {
+  const method = req.method;
+  const url = req.url;
+  const time = new Date();
+  console.log(`Method: ${method}, URL: ${url}, Time: ${time}`);
+  next();
+};
+
+//HTTP Methods
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static("./public"));
+app.use(logger);
 
 app.get(`/api/v1/test`, (req, res) => {
   return res.json({ message: "It worked!" });
+});
+
+app.get(`/api/v1/people`, (req, res) => {
+  return res.json({ people });
+});
+
+app.post(`/api/v1/people`, (req, res) => {
+  if (!req.body.name) {
+    res.status(400).json({ success: false, message: "Please provide a name." });
+  } else {
+    res.json({ success: true, message: `${req}` });
+  }
 });
 
 app.get(`/api/v1/products`, (req, res) => {
@@ -16,13 +41,13 @@ app.get(`/api/v1/products`, (req, res) => {
 });
 
 app.get(`/api/v1/products/sortPriceLow`, (req, res) => {
-  const lowProducts = products.sort((a, b) => a.price - b.price);
-  return res.json({ lowProducts });
+  const sortedProducts = products.sort((a, b) => a.price - b.price);
+  return res.json({ sortedProducts });
 }); //sort products with prices in ascending order
 
 app.get(`/api/v1/products/sortPriceHigh`, (req, res) => {
-  const highProducts = products.sort((a, b) => b.price - a.price);
-  return res.json({ highProducts });
+  const sortedProducts = products.sort((a, b) => b.price - a.price);
+  return res.json({ sortedProducts });
 }); //sort products with prices in descending order
 
 app.get(`/api/v1/products/:productID`, (req, res) => {
@@ -36,7 +61,7 @@ app.get(`/api/v1/products/:productID`, (req, res) => {
 });
 
 app.get(`/api/v1/query`, (req, res) => {
-  const { search, limit } = req.query;
+  const { search, limit, sortPrice, sortNegPrice } = req.query;
   let sortedProducts = [...products];
 
   if (search) {
@@ -47,6 +72,14 @@ app.get(`/api/v1/query`, (req, res) => {
   if (limit) {
     sortedProducts = sortedProducts.slice(0, Number(limit));
   }
+  // if (sortPrice) {
+  //   sortedProducts = sortedProducts.sort((a, b) => a.price - b.price);
+  //   return sortedProducts;
+  // }
+  // if (sortNegPrice) {
+  //   sortedProducts = sortedProducts.sort((a, b) => b.price - a.price);
+  //   return sortedProducts;
+  // }
   if (sortedProducts.length < 1) {
     return res
       .status(200)
