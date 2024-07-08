@@ -11,22 +11,6 @@ app.use(express.urlencoded({extended:false}))
 //7-This is to handle the post JSON data need another middleware
 app.use(express.json())
 
-//read the data 
-app.get('/api/people',(req,res)=>{
-    res.status(200).json({success:true,data:people})
-})
-
-//handle post from javascript.html using vanilla javascript and axios, when you run this headers say application json, so we need to add the content type, axios adds for us, usally we do this manually 
-app.post('api/people', (req, res) =>{
-    const { name } = req.body
-    if(!name){
-        return res
-        .status(400)
-        .json({success:false, msg: 'please provide a name value'})
-    }
-    res.status(201).json({success:true, person:name})
-})
-
 //add data/insert data- use post data / name came from the form 
 app.post('/login', (req, res) =>{
     const {name} = req.body;
@@ -36,7 +20,25 @@ app.post('/login', (req, res) =>{
     res.status(401).send('POST')
 })
 
-//
+//read the data 
+app.get('/api/people',(req,res)=>{
+    res.status(200).json({success:true,data:people})
+})
+
+//handle post from javascript.html using vanilla javascript and axios, when you run this headers say application json, so we need to add the content type, axios adds for us, usally we do this manually 
+app.post('api/people/postman', (req, res) =>{
+    const { name } = req.body
+    if(!name){
+        return res
+        .status(400)
+        .json({success:false, msg: 'please provide a name value'})
+    }
+    res.status(201).json({success:true, person:name})
+})
+
+
+
+//10 this is adding the person entered into the array we arent worrying about id yet database usually does it for us 
 app.post('/api/postman/people', (req,res)=>{
     const {name} = req.body
     if(!name){
@@ -47,9 +49,50 @@ app.post('/api/postman/people', (req,res)=>{
     res.status(201).json({success:true, data: [...people]})
 })
 
+//updating need an id or specific area, need the value from the req params, then we need to update it, so 2 parts!! 
+app.put('/api/people/:id', (req, res) =>{
+    //params is id because thats what was intered in the address 
+    const {id} = req.params
+    const {name} = req.body
+      // people.find searched array 
+      const person = people.find((person)=>( person.id === Number(id)))
+      if(!person){
+        return res
+        //404 cant find the resource 
+        .status(404)
+        .json({success:false, msg: `No person with id: ${id}` })
+    }
+    //NOW - iterate over the array update the name with the name provided in the body, the new array is now called newPeople
+    const newPeople = people.map((person)=>{
+        if(person.id === Number(id)){
+            //this is the name from the body 
+            person.name = name
+        }
+        return person
+    })
+    //send back the new array 
+    res.status(200).json({success: true, data: newPeople})
+})
+
+//11- extremely similar to put 
+app.delete('/api/people/:id', (req, res)=>{
+    const person = people.find((person)=>( person.id === Number(req.params.id)))
+      if(!person){
+        return res
+        //404 cant find the resource 
+        .status(404)
+        .json({success:false, msg: `No person with id: ${req.params.id}` })
+    }
+        const newPeople = people.filter((person)=>{
+            person.id !== Number(req.params.id)
+        });
+        return res.status(200).json({sucess:true, data:newPeople })
+})
+    
+    
 app.listen(5000, ()=>{
     console.log('Server listening on port 5000....')
-});
+})
 
 
 //1
@@ -126,4 +169,42 @@ app.listen(5000, ()=>{
 //test for the error send {'name': ''}
 //get {'success':false, 'msg': 'please provide name'}
 
-//9 - new post setup 
+//9 - new post setup INSERT 
+
+//10- Put method means UPDATE - EDITING 
+    //put updates specific order(params + send data)
+//need to add the address with id, then go to the body raw and hit json again... 
+//10- first iteration 
+// app.put('/api/people/:id', (req, res) => {
+//     const {id} = req.params
+//     const {name} = req.body
+//     console.log(id,name);
+//     res.send('hello world')
+// })
+//POSTMAN enter route /1 to get the first, then send /2 to change the id
+//NOW - need to add logic 
+
+//11 LASTLY Delete - is VERY similar to put, when we delete arent expecting anything in the body 
+//CRUCIAL - just because the paths are the same or the route these are DIFFERENT requests because they are different methods GET/POST/PUT/DELETE 
+// route/id - removes that one with that id 
+
+//Problem this file is getting long, whats the solution? Using the express router where we can group these as separate controllers 
+
+//When we do database will will do the MVC way... it is a nicely used pattern when setting up the API, we havent connected to the database yet, common convention and pattern
+//stick to the pattern, we will copy paste/ or refractor the code
+
+//12
+//Original POST
+// app.post('api/people', (req, res) =>{
+//     const { name } = req.body
+//     if(!name){
+//         return res
+//         .status(400)
+//         .json({success:false, msg: 'please provide a name value'})
+//     }
+//     res.status(201).json({success:true, person:name})
+// })
+
+//Notice the file pattern order /login, /api/people, /api/people/postman, api/people/id - What if we could group these?
+//How can we make these separate? Create/setup the router
+//make folder called routes 
