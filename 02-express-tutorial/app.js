@@ -3,7 +3,10 @@ console.log("Express Tutorial");
 //Requires
 const express = require(`express`);
 const app = express();
-const { products, people } = require("./data");
+const { products } = require(`./data`);
+const peopleRouter = require(`./routes/people`);
+const auth = require(`./authorize.js`);
+const cookieParser = require(`cookie-parser`);
 
 //Middleware
 const logger = (req, res, next) => {
@@ -14,40 +17,37 @@ const logger = (req, res, next) => {
   next();
 };
 
+app.use(express.urlencoded({ extended: false })); //parse form data
+app.use(express.json()); // parse json
+app.use(cookieParser()); // parse cookies
+app.use(express.static("./public")); // static assets
+app.use(logger); // log requests
+app.use("/api/v1/people", peopleRouter); // route people requests
+app.use("/api", auth); // authorize with cookies
+
 //HTTP Methods
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(express.static("./public"));
-app.use(logger);
-
 app.get(`/api/v1/test`, (req, res) => {
-  return res.json({ message: "It worked!" });
+  return res.json({ message: `It worked! Welcome ${req.user}` });
 });
 
-app.get(`/api/v1/people`, (req, res) => {
-  return res.json({ people });
-});
-
-app.get(``, (req, res) => {
-  return res.json({ people });
-});
-
-app.post(`/api/v1/people`, (req, res) => {
+app.post(`/logon`, (req, res) => {
   if (!req.body.name) {
-    res.status(400).json({ success: false, message: "Please provide a name." });
+    return res
+      .status(400)
+      .json({ success: false, message: "Please provide a name." });
   } else {
-    people.push({ id: people.length + 1, name: req.body.name });
-    res.status(201).json({ success: true, name: req.body.name });
+    res.cookie("name", req.body.name);
+    return res
+      .status(201)
+      .json({ success: true, message: `Hello ${req.body.name}` });
   }
 });
 
-app.post(`/api/v1/people/postman`, (req, res) => {
-  if (!req.body.name) {
-    res.status(400).json({ success: false, message: "Please provide a name." });
-  } else {
-    people.push({ id: people.length + 1, name: req.body.name });
-    res.status(201).json({ success: true, name: req.body.name });
-  }
+app.delete(`/logoff`, (req, res) => {
+  res.clearCookie("name");
+  return res
+    .status(200)
+    .json({ success: true, message: `Signed off. Good Bye!` });
 });
 
 app.get(`/api/v1/products`, (req, res) => {
@@ -110,3 +110,30 @@ app.all(`*`, (req, res) => {
 app.listen(3000, () => {
   console.log("Server is listening on port 3000.....");
 });
+
+// Obsolete Code
+// app.get(`/api/v1/people`, (req, res) => {
+//   return res.json({ people });
+// });
+
+// app.get(`/api/v1/people/postman`, (req, res) => {
+//   return res.json({ people });
+// });
+
+// app.post(`/api/v1/people`, (req, res) => {
+//   if (!req.body.name) {
+//     res.status(400).json({ success: false, message: "Please provide a name." });
+//   } else {
+//     people.push({ id: people.length + 1, name: req.body.name });
+//     res.status(201).json({ success: true, name: req.body.name });
+//   }
+// });
+
+// app.post(`/api/v1/people/postman`, (req, res) => {
+//   if (!req.body.name) {
+//     res.status(400).json({ success: false, message: "Please provide a name." });
+//   } else {
+//     people.push({ id: people.length + 1, name: req.body.name });
+//     res.status(201).json({ success: true, name: req.body.name });
+//   }
+// });
