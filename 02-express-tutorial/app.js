@@ -15,15 +15,15 @@ app.get(`/api/v1/products`, (req, res) => {
   return res.json({ products });
 });
 
-app.get(`/api/v1/products/sortPriceLow`, (req, res) => {
-  const lowProducts = products.sort((a, b) => a.price - b.price);
-  return res.json({ lowProducts });
-}); //sort products with prices in ascending order
+// app.get(`/api/v1/products/sortPriceLow`, (req, res) => {
+//   const lowProducts = products.sort((a, b) => a.price - b.price);
+//   return res.json({ lowProducts });
+// }); //sort products with prices in ascending order
 
-app.get(`/api/v1/products/sortPriceHigh`, (req, res) => {
-  const highProducts = products.sort((a, b) => b.price - a.price);
-  return res.json({ highProducts });
-}); //sort products with prices in descending order
+// app.get(`/api/v1/products/sortPriceHigh`, (req, res) => {
+//   const highProducts = products.sort((a, b) => b.price - a.price);
+//   return res.json({ highProducts });
+// }); //sort products with prices in descending order
 
 app.get(`/api/v1/products/:productID`, (req, res) => {
   const idToFind = parseInt(req.params.productID);
@@ -46,6 +46,14 @@ app.get(`/api/v1/query`, (req, res) => {
   }
   if (limit) {
     sortedProducts = sortedProducts.slice(0, Number(limit));
+  }
+  if (sortPrice) {
+    sortedProducts = sortedProducts.sort((a, b) => a.price - b.price);
+    return sortedProducts;
+  }
+  if (sortNegPrice) {
+    sortedProducts = sortedProducts.sort((a, b) => b.price - a.price);
+    return sortedProducts;
   }
   if (sortedProducts.length < 1) {
     return res
