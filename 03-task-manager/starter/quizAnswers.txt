@@ -1,0 +1,12 @@
+(1) Quickly explain how middleware is used in an Express application.
+-- Middleware is/are functions automatically initialized when following a designated path.
+
+(2) What does CRUD stand for?
+-- Create, Read, Update, Delete
+
+(3) You are careful to store your sensitive information in a .env file.
+      1 How do you get your app to access the information in the .env file?
+      --Require dotenv and then config it
+
+      2 How do you protect the contents of the .env file so that it is not stored in your Github repository?
+      --Before ever entering sensitive information, create the .env file AND the .gitignore (if not already present) and immediately add the .env. Only ever enter sensitive data directly into the env, never elsewhere, even temporarily.
