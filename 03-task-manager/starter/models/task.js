@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-//this sets up how we want our data 
+//this sets up how we want our data //EVERYTHING ELSE except these two will be ignored!!! 
 const TaskSchema = new mongoose.Schema(
     {
         name:String,completed:Boolean
