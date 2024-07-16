@@ -1,0 +1,19 @@
+Quickly explain how middleware is used in an Express application.
+    Middleware are all the functions that get called and used by the requests and responses
+     they can manage request handling, how things are executed. and also how to manage errors.
+
+What does CRUD stand for?
+    The rest API is built around CRUD, stands for:
+    Create, Read, Update, Delete 
+
+    REST - representational state transfer
+
+You are careful to store your sensitive information in a .env file.
+
+    How do you get your app to access the information in the .env file?
+        You add .env to the .gitignore file to tell it to ignore the contents 
+    How do you protect the contents of the .env file so that it is not stored in your Github repository?
+        Make sure all sensitive info is added to the .env then add the .env to the .gitignore file!
+
+*We set up the API and persist the data 
+
