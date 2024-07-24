@@ -1,35 +1,35 @@
-
-//npm install - download everything 
-// npm start - to spin up nodemon 
 const express = require('express');
-const app = express('./db/connect');
-const tasks = require('./routes/tasks')
-const connectDB = require('./db/connect')
-//this hides files, dont need to name it 
-require('dotenv').config()
+const app = express();
+const tasks = require('./routes/tasks');
+const connectDB = require('./db/connect');
+//hides files 
+require('dotenv').config();
+const notFound = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
-//middleware
-//this middleware is so we have access to req.body 
-app.use(express.json())
+// middleware
 
-//routes
-app.get('/hello', (req,res)=>{
-    res.send('Task Manager App')
-})
+app.use(express.static('./public'));
+app.use(express.json());
 
-// http://localhost:3000/api/v1/tasks
-app.use('/api/v1/tasks', tasks)
+// routes
 
-// eventually more code 
-const port = 3000
+app.use('/api/v1/tasks', tasks);
 
-const start =async() => {
-    try{
-        await connectDB(process.env.MONGO_URI)
-        app.listen(port, console.log(`Server is listening on port ${port}...`))
-    }catch (error){
-        console.log(`This is your ERROR: ${error}`)
-    }
-}
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+//in terminal to change PORT=6000 node app.js
+const port = process.env.PORT || 3000;
 
-start()
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();

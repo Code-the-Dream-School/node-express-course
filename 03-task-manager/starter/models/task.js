@@ -1,13 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-//this sets up how we want our data //EVERYTHING ELSE except these two will be ignored!!! 
-const TaskSchema = new mongoose.Schema(
-    {
-        name:String,completed:Boolean
-    }
-)
+const TaskSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'must provide name'],
+    trim: true,
+    maxlength: [20, 'name can not be more than 20 characters'],
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+})
 
 module.exports = mongoose.model('Task', TaskSchema)
 
 //thik of model as representation of the data this makes CRUD easy
 //now we need to go to our controllers and start using the model 
+//mongoose docs has a lot about validation 
