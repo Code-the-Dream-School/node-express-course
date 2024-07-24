@@ -1,0 +1,8 @@
+1. We use them to handle various aspects of request processing such as authentication, logging, error handling
+2. CRUD : C - Create
+        : R - Read
+        : U - Update
+        : D - Delete
+3.  1. Install npm package dotenv
+      - npm i dotenv
+    2. Add .env to .gitignore
