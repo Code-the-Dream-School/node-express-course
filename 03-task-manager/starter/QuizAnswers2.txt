@@ -1,0 +1,20 @@
+ Put answers to the following questions in it.
+
+1. In this lesson, you created a middleware function called asyncWrapper. Why?
+    We can re-use the middleware asyncWrapper for all the functions from controller/tasks.js 
+    since we need to create an async function and have try and catch inside of it. that's why it's good to create
+    a middleware and just re-use it inside of each function to save some work and easier readable. 
+
+
+2. Suppose that you want to make sure that both a status code and an error message are sent back to the user when 
+    they request the URL for a task that does not exist. Assume that you’ve created a CustomAPIError class and an 
+    error handler that references that class. Complete the code:
+    
+    const getTask = asyncWrapper(async (req, res, next) => {  
+        const { id: taskID } = req.params;  
+        const task = await Task.findOne({ _id: taskID });  
+        if (!task) {  
+            return next(createCustomAPIError(`No task with id: ${taskID}`, 404))
+        }  
+        res.status(200).json({ task });  
+        });  
