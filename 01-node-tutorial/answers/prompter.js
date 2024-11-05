@@ -1,4 +1,5 @@
 const http = require("http");
+const fs = require('fs')
 var StringDecoder = require("string_decoder").StringDecoder;
 
 const getBody = (req, callback) => {
@@ -23,6 +24,7 @@ const getBody = (req, callback) => {
 // here, you could declare one or more variables to store what comes back from the form.
 let item = "Enter something below.";
 
+
 // here, you can change the form below to modify the input fields and what is displayed.
 // This is just ordinary html with string interpolation.
 const form = () => {
@@ -46,6 +48,17 @@ const server = http.createServer((req, res) => {
       // here, you can add your own logic
       if (body["item"]) {
         item = body["item"];
+        fs.writeFile('./temporary/fileC.txt',item + ' \n',{ flag: 'a' },(err)=>{
+          if (err){
+            console.log(err)
+          }
+          else {
+            console.log('written successfully')
+            const text = fs.readFileSync('./temporary/fileC.txt', { encoding: 'utf8' })
+            console.log(text)
+          }
+        })
+        
       } else {
         item = "Nothing was entered.";
       }
