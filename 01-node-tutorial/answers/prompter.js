@@ -45,6 +45,9 @@ const server = http.createServer((req, res) => {
       console.log("The body of the post is ", body);
       // here, you can add your own logic
       if (body["item"]) {
+        if(body["item"] == "1"){
+          body["item"] == "1 is what!"
+        }
         item = body["item"];
       } else {
         item = "Nothing was entered.";

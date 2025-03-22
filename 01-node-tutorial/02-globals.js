@@ -8,5 +8,5 @@
 
 console.log(__dirname)
 setInterval(() => {
-  console.log('hello world')
+  console.log('hello its me JOHN')
 }, 1000)
