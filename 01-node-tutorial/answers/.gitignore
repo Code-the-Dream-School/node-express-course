@@ -141,3 +141,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Tutorial-specific ignores
+.DS_Store
+temp.txt
