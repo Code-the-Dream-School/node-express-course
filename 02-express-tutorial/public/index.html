@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Express Tutorial</title>
+</head>
+<body>
+<h1>Welcome to Express.js</h1>
+<button id="load-products">Load Products</button>
+<div id="products"></div>
+
+<script>
+  async function loadProducts() {
+    const div = document.getElementById('products');
+    div.textContent = 'Loading...';
+    try {
+      const res = await fetch('/api/v1/products');
+      if (!res.ok) {
+        throw new Error('HTTP status ' + res.status);
+      }
+      const data = await res.json();
+
+      div.innerHTML = data.map(p => `
+          <div style="border:1px solid #ccc; margin:8px; padding:8px;">
+            <h2>${p.name}</h2>
+            <p>Price: $${p.price.toFixed(2)}</p>
+            <img src="${p.image}" width="150" alt="${p.name}">
+            <p>${p.desc}</p>
+          </div>
+        `).join('');
+    } catch (err) {
+      div.textContent = 'Error: ' + err.message;
+    }
+  }
+
+  document.getElementById('load-products')
+          .addEventListener('click', loadProducts);
+</script>
+</body>
+</html>
