@@ -4,6 +4,7 @@
 // module     - info about current module (file)
 // process    - info about env where the program is being executed
 //setx MY_VAR "Hi there!" and setx is a Windows command-line utility used to create or modify environment variables permanently for your user account or the system.(use this inside CMD or Powershell)
+//cmd :set MY_VAR="Hi there!"
 //set (temp) and setx (permanent) on terminal
 
 
