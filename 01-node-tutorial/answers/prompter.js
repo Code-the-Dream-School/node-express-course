@@ -22,16 +22,18 @@ const getBody = (req, callback) => {
 
 // here, you could declare one or more variables to store what comes back from the form.
 let item = "Enter something below.";
-
+let bgColor = "#227dc9ff"; //added by me*
 // here, you can change the form below to modify the input fields and what is displayed.
 // This is just ordinary html with string interpolation.
 const form = () => {
   return `
-  <body>
+  <body style="background-color:${bgColor}; font-family:sans-serif; text-align:center; padding:50px;">
+    <h2>Fun Form!</h2> 
   <p>${item}</p>
   <form method="POST">
-  <input name="item"></input>
-  <button type="submit">Submit</button>
+  <input name="item" 
+             style="background-color:#fff8dc; border:2px solid #333; padding:10px; border-radius:5px; font-size:16px;">
+      <button type="submit" style="padding:10px 20px; font-size:16px;">Submit</button>
   </form>
   </body>
   `;
@@ -46,6 +48,8 @@ const server = http.createServer((req, res) => {
       // here, you can add your own logic
       if (body["item"]) {
         item = body["item"];
+        // change background color randomly each submit
+  bgColor = `hsl(${Math.floor(Math.random() * 360)}, 70%, 80%)`;
       } else {
         item = "Nothing was entered.";
       }
@@ -62,3 +66,9 @@ const server = http.createServer((req, res) => {
 
 server.listen(3000);
 console.log("The server is listening on port 3000.");
+
+//Hue (H)= 200 → a blueish color
+
+//Saturation(S) = 70% → fairly vivid
+
+//Lightness (L)= 80% → light/pastel shade
