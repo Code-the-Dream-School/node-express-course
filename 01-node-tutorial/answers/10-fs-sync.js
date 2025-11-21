@@ -1,0 +1,8 @@
+const { readFileSync, writeFileSync } = require('fs')
+const path = require('path')
+const filePath = path.join(__dirname ,'temporary','fileA.txt')
+writeFileSync('filePath','This is Line 1\n')
+writeFileSync('filePath','This is Line 2\n', {flag: 'a'})
+writeFileSync('filePath','This is Line 3\n', {flag: 'a'})
+  const content = readFileSync('filePath' ,'utf8')
+  console.log(content)
