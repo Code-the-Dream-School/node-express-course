@@ -20,19 +20,24 @@ const getBody = (req, callback) => {
   });
 };
 
-// here, you could declare one or more variables to store what comes back from the form.
-let item = "Enter something below.";
+//Generate a random secret number between 1 and 100
+let secretNumber = Math.floor(Math.random() * 100) + 1;
+let message = "Guess the number between 1 and 100.";
+let attempts = 0;
 
-// here, you can change the form below to modify the input fields and what is displayed.
-// This is just ordinary html with string interpolation.
 const form = () => {
   return `
   <body>
-  <p>${item}</p>
-  <form method="POST">
-  <input name="item"></input>
-  <button type="submit">Submit</button>
-  </form>
+    <h1>Number Guessing Game</h1>
+    <p>${message}</p>
+    <p>Attempts: ${attempts}</p>
+    <form method="POST">
+      <input name="guess" type="number" min="1" max="100" placeholder="Enter your guess"></input>
+      <button type="submit">Guess</button>
+    </form>
+    <form method="POST">
+      <button name="reset" value="true" type="submit">New Game</button>
+    </form>
   </body>
   `;
 };
@@ -43,13 +48,35 @@ const server = http.createServer((req, res) => {
   if (req.method === "POST") {
     getBody(req, (body) => {
       console.log("The body of the post is ", body);
-      // here, you can add your own logic
-      if (body["item"]) {
-        item = body["item"];
-      } else {
-        item = "Nothing was entered.";
+
+      // Check if user wants to reset the game
+      if (body["reset"]) {
+        secretNumber = Math.floor(Math.random() * 100) + 1;
+        message = "New game started! Guess the number between 1 and 100.";
+        attempts = 0;
+        console.log(`New secret number generated: ${secretNumber}`);
       }
-      // Your code changes would end here
+      // Process the guess
+      else if (body["guess"]) {
+        const guess = parseInt(body["guess"]);
+        attempts++;
+
+        console.log(`Player guessed: ${guess}, Secret number: ${secretNumber}, Attempts: ${attempts}`);
+
+        if (isNaN(guess)) {
+          message = "Please enter a valid number!";
+        } else if (guess === secretNumber) {
+          message = `Congratulations! You guessed it in ${attempts} attempts! The number was ${secretNumber}.`;
+          console.log(`Player won in ${attempts} attempts!`);
+        } else if (guess < secretNumber) {
+          message = `Too low! Try again. (Attempt ${attempts})`;
+        } else {
+          message = `Too high! Try again. (Attempt ${attempts})`;
+        }
+      } else {
+        message = "Please enter a guess!";
+      }
+
       res.writeHead(303, {
         Location: "/",
       });
@@ -60,5 +87,8 @@ const server = http.createServer((req, res) => {
   }
 });
 
+server.on("request", (req) => {  
+  console.log("event received: ", req.method, req.url);  
+});  
 server.listen(3000);
 console.log("The server is listening on port 3000.");

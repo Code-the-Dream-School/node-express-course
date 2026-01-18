@@ -1,0 +1,10 @@
+1) We Created a asyncWrapper middleware function so we can handle errors in async route automatically. Doing this we cut down on using try and catch block. It also catches any errors that occur in the async operations 
+
+const getTask = asyncWrapper(async (req, res, next) => {  
+  const { id: taskID } = req.params;  
+  const task = await Task.findOne({ _id: taskID });  
+  if (!task) {  
+    return next(createCustomError(`No task with id : ${taskID}`, 404))
+  }  
+  res.status(200).json({ task });  
+});  

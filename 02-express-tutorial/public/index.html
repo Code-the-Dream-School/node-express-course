@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products API</title>
+</head>
+<body>
+    <h1>Hello World! :P</h1>
+    <button id="fetchProducts">Load Products</button>
+    <div id="products"></div>
+
+    <script>
+        document.getElementById('fetchProducts').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/v1/products');
+                const data = await response.json();
+
+                const productsDiv = document.getElementById('products');
+                productsDiv.innerHTML = '';
+
+                data.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'product';
+                    productDiv.innerHTML = `
+                        <h2>${product.name}</h2>
+                        <img src="${product.image}" alt="${product.name} image">
+                        <p>Price: $${product.price}</p>
+                        <p>${product.desc}</p>
+                    `;
+                    productsDiv.appendChild(productDiv);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('products').innerHTML = '<p>Error loading products</p>';
+            }
+        });
+    </script>
+</body>
+</html>
