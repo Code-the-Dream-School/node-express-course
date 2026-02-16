@@ -1,4 +1,7 @@
+
+
 const products = [
+  { id: 7, name: "Lamp", price: 15.0 },
   {
     id: 1,
     name: 'albany sofa',

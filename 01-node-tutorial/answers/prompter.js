@@ -1,6 +1,7 @@
 const http = require("http");
 var StringDecoder = require("string_decoder").StringDecoder;
 
+// Function to parse the body of the POST request
 const getBody = (req, callback) => {
   const decode = new StringDecoder("utf-8");
   let body = "";
@@ -20,18 +21,25 @@ const getBody = (req, callback) => {
   });
 };
 
-// here, you could declare one or more variables to store what comes back from the form.
-let item = "Enter something below.";
+// Generate a random number between 1 and 10
+const generateRandomNumber = () => {
+  return Math.floor(Math.random() * 10) + 1;
+};
 
-// here, you can change the form below to modify the input fields and what is displayed.
-// This is just ordinary html with string interpolation.
+// Declare variables for game state
+let randomNumber = generateRandomNumber();
+let message = "Guess a number between 1 and 10.";
+let guessResult = "";
+
+// HTML form for the game
 const form = () => {
   return `
   <body>
-  <p>${item}</p>
+  <p>${message}</p>
+  <p>${guessResult}</p>
   <form method="POST">
-  <input name="item"></input>
-  <button type="submit">Submit</button>
+    <input name="guess" type="number" min="1" max="10" required></input>
+    <button type="submit">Submit Guess</button>
   </form>
   </body>
   `;
@@ -40,16 +48,24 @@ const form = () => {
 const server = http.createServer((req, res) => {
   console.log("req.method is ", req.method);
   console.log("req.url is ", req.url);
+
   if (req.method === "POST") {
     getBody(req, (body) => {
       console.log("The body of the post is ", body);
-      // here, you can add your own logic
-      if (body["item"]) {
-        item = body["item"];
+      const userGuess = parseInt(body["guess"], 10);
+
+      // Check the guess
+      if (userGuess === randomNumber) {
+        guessResult = `Correct! The number was ${randomNumber}.`;
+        message = "You won! Refresh the page to play again.";
       } else {
-        item = "Nothing was entered.";
+        guessResult = `Wrong! You guessed ${userGuess}. Try again.`;
+        message = "Guess a number between 1 and 10.";
       }
-      // Your code changes would end here
+
+      // After the guess, reset the random number for a new game
+      randomNumber = generateRandomNumber();
+
       res.writeHead(303, {
         Location: "/",
       });
